@@ -1,0 +1,41 @@
+{
+  "name": "web-function-test",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k19810703/web-function-test.git"
+  },
+  "keywords": [
+    "web",
+    "test",
+    "puppeteer"
+  ],
+  "author": "wuhd <k19810703@163.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/k19810703/web-function-test/issues"
+  },
+  "homepage": "https://github.com/k19810703/web-function-test#readme",
+  "dependencies": {
+    "puppeteer": "^1.14.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-angular": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.0",
+    "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.1.0",
+    "superagent": "^4.0.0",
+    "supertest": "^3.3.0"
+  }
+}
