@@ -7,7 +7,7 @@ const {
 } = require('./util/util');
 
 (async () => {
-  const browser = await puppeteer.launch({headless: false});
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
   for(let caseidx = 0; caseidx < testdata.length; caseidx = caseidx + 1) {
