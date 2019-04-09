@@ -12,6 +12,7 @@ async function actionInput(action) {
   }
   await action.page.screenshot({
     path: getScreenShotFileName(action),
+    fullPage: true,
   });
 };
 

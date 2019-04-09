@@ -5,6 +5,7 @@ async function actionOpenUrl(action) {
   await action.page.goto(action.actionParam);
   await action.page.screenshot({
     path: getScreenShotFileName(action),
+    fullPage: true,
   });
 }
 
