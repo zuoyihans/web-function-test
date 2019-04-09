@@ -1,11 +1,10 @@
+const { getScreenShotFileName } = require('../util/util');
 
-
-async function actionOpenUrl(actiondetail) {
-  // console.log('actionOpenUrl', 'actiondetail', actiondetail);
-  await actiondetail.page.goto(actiondetail.url);
-  console.log('save as ', actiondetail.snapshotname);
-  await actiondetail.page.screenshot({
-    path: actiondetail.snapshotname,
+async function actionOpenUrl(action) {
+  // console.log('actionOpenUrl', JSON.stringify(action));
+  await action.page.goto(action.actionParam);
+  await action.page.screenshot({
+    path: getScreenShotFileName(action),
   });
 }
 

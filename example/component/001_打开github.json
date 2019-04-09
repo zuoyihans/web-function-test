@@ -1,0 +1,10 @@
+{
+  "description": "打开github登录页面的URL",
+  "actions": [
+    {
+      "description": "打开url",
+      "actionType": "openUrl",
+      "actionParam": "P_GitHubUrl"
+    }
+  ]
+}

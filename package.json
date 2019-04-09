@@ -1,7 +1,11 @@
 {
-  "name": "web-function-test",
+  "name": "@cic-digital/web-function-test",
+  "preferGlobal": true,
   "version": "0.0.1",
   "description": "",
+  "directories": {
+    "bin": "./bin"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

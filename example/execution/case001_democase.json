@@ -1,0 +1,10 @@
+[
+  {
+    "ukey": "c001",
+    "component": "001_打开github"
+  },
+  {
+    "ukey": "c002",
+    "component": "002_登录github"
+  }
+]
