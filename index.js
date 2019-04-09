@@ -48,7 +48,7 @@ async function executeTest(casefile, config) {
   const caseid = casefile.replace('.json', '');
   const browser = await puppeteer.launch(
     {
-      headless: false,
+      // headless: false,
       ignoreHTTPSErrors: true,
     },
   );
