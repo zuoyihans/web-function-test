@@ -6,9 +6,10 @@
 npm install -g @cic-digital/web-function-test
 git clone https://github.com/k19810703/web-function-test.git
 cd web-function-test
+vim ./example/execution/param.json
 ```
 
-打开./execution/param.json,填上你的github账号和密码
+填上你的github账号和密码,保存退出
 
 ```
 runwebtest config.json
