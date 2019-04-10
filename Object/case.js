@@ -18,7 +18,7 @@ const { actionOpenUrl } = require('../actions/openUrl');
 const { actionInput } = require('../actions/input');
 const { actionClick } = require('../actions/click');
 const { actionCheckbox } = require('../actions/checkbox');
-const { actionVerifyText } = require('../actions/checkbox');
+const { actionVerifyText } = require('../actions/verifyText');
 
 class TestCase {
   constructor(casefile, config) {
