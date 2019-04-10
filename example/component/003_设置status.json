@@ -1,0 +1,31 @@
+{
+  "description": "设置status",
+  "actions": [
+    {
+      "description": "点击上部菜单头像图标",
+      "actionType": "click",
+      "objectXpath": "/html/body/div[1]/header/div[7]/details/summary/span"
+    },
+    {
+      "description": "点击set your status",
+      "actionType": "click",
+      "objectXpath": "/html/body/div[1]/header/div[7]/details/details-menu/div[3]/div/details/summary/div[2]/span"
+    },
+    {
+      "description": "操作busy checkbox",
+      "actionType": "checkbox",
+      "actionParam": "P_BusyCheckBox",
+      "objectXpath": "//*[@id=\"limited-availability-truncate-true\"]"
+    },
+    {
+      "description": "点击Set status按钮",
+      "actionType": "click",
+      "objectXpath": "/html/body/div[1]/header/div[7]/details/details-menu/div[3]/div/details/details-dialog/form/div[3]/button[1]"
+    },
+    {
+      "description": "重新点击上部菜单头像图标，收回菜单",
+      "actionType": "click",
+      "objectXpath": "/html/body/div[1]/header/div[7]/details/summary/span"
+    }
+  ]
+}

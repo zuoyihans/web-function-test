@@ -1,9 +1,13 @@
 # web-function-test
 
-基于chrome内核的自动化测试工具，用户只需要定义测试流程和数据，完全不需要代码
+基于Chromium内核的自动化测试工具，用户只需要定义测试流程和数据，完全不需要代码
 
 ##  申明
-还在开发过程，目前只能演示一下到底能干啥
+基于[puppeteer](https://github.com/GoogleChrome/puppeteer)开发的web应用程序自动化测试
+
+还在开发过程，目前只能演示一下到底能干啥。
+
+
 
 ## quick start
 

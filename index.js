@@ -2,6 +2,12 @@
 
 const fs = require('fs');
 const puppeteer = require('puppeteer');
+const srs = require('secure-random-string');
+const jsonfile = require('jsonfile');
+const chalk = require('chalk');
+
+const { log } = console;
+const has = Object.prototype.hasOwnProperty;
 
 const {
   readJsonFile,
@@ -13,10 +19,12 @@ const {
   openUrl,
   input,
   click,
+  checkbox,
 } = require('./util/constant');
 const { actionOpenUrl } = require('./actions/openUrl');
 const { actionInput } = require('./actions/input');
 const { actionClick } = require('./actions/click');
+const { actionCheckbox } = require('./actions/checkbox');
 
 async function executeActions(page, data) {
   for (let actionidx = 0; actionidx < data.actions.length; actionidx += 1) {
@@ -36,6 +44,9 @@ async function executeActions(page, data) {
       case click:
         await actionClick(paramAction);
         break;
+      case checkbox:
+        await actionCheckbox(paramAction);
+        break;
       default:
         throw new Error(`unknow action ${paramAction.actionType}`);
     }
@@ -46,10 +57,18 @@ async function executeTest(casefile, config) {
   const params = await readJsonFile(`${config.executionFolder}/param.json`);
   const caseinfo = await readJsonFile(`${config.executionFolder}/${casefile}`);
   const caseid = casefile.replace('.json', '');
+  const width = config.viewPort.width || 1280;
+  const height = config.viewPort.height || 768;
   const browser = await puppeteer.launch(
     {
-      // headless: false,
+      headless: config.headless,
       ignoreHTTPSErrors: true,
+      args: [`--window-size=12${width},${height}`],
+      defaultViewport: {
+        width,
+        height,
+      },
+      slowMo: config.delay,
     },
   );
   const page = await browser.newPage();
@@ -74,7 +93,7 @@ async function executeTest(casefile, config) {
       },
     );
   }
-  await browser.close();
+  // await browser.close();
   return '';
 }
 
@@ -88,4 +107,71 @@ async function main(configpath) {
   }
 }
 
+async function updateExecution(configpath) {
+  log(chalk.green('updateExecution start'));
+  const config = await readJsonFile(configpath);
+  const { executionFolder, componentFolder } = config;
+  const paramexists = fs.existsSync(`${executionFolder}/param.json`);
+  let params = {};
+  if (paramexists) {
+    params = readJsonFile(`${executionFolder}/param.json`);
+  }
+  const files = fs.readdirSync(executionFolder);
+  const casefilelist = getCasefilelist(files);
+  casefilelist.forEach((singlecase) => {
+    log(chalk.yellow(`processing case file ${singlecase} start`));
+    const casecontent = readJsonFile(`${executionFolder}/${singlecase}`);
+    const updatedContent = casecontent.map((component, index) => {
+      log(chalk.yellow(`check ukey ${component.component} start`));
+      const updatedComponent = { ...component };
+      updatedComponent.index = index + 1;
+      if (!has.call(updatedComponent, 'ukey')) {
+        log(chalk.yellow(`add ukey to ${component.component}`));
+        updatedComponent.ukey = srs({
+          length: 8,
+          alphanumeric: true,
+        });
+      }
+      if (!has.call(params, updatedComponent.ukey)) {
+        params[updatedComponent.ukey] = {};
+      }
+      log(chalk.yellow(`check ukey ${component.component} end`));
+      return updatedComponent;
+    });
+    log(chalk.yellow(`processing case file ${singlecase} end`));
+    log(chalk.cyan('searching param start'));
+
+    updatedContent.forEach((content) => {
+      const componentinfo = readJsonFile(`${componentFolder}/${content.component}.json`);
+      componentinfo.actions.forEach((action) => {
+        log(chalk.cyan(`searching ${componentinfo.description} => ${action.description}`));
+        if (action.actionParam) {
+          log(chalk.cyan(`checking action param ${action.actionParam} in params`));
+          if (!has.call(params[content.ukey], action.actionParam)) {
+            params[content.ukey][action.actionParam] = '';
+          }
+        }
+        if (action.objectParams) {
+          action.objectParams.forEach((objectParam) => {
+            log(chalk.cyan(`checking object param ${objectParam} in params`));
+            if (!has.call(params[content.ukey], objectParam)) {
+              params[content.ukey][objectParam] = '';
+            }
+          });
+        }
+      });
+    });
+    log(chalk.cyan('searching param end'));
+
+    jsonfile.writeFile(`${executionFolder}/${singlecase}`, updatedContent, { spaces: 2, EOL: '\r\n' }, (writeerr) => {
+      if (writeerr) log.error(writeerr);
+    });
+  });
+  jsonfile.writeFile(`${executionFolder}/param.json`, params, { spaces: 2, EOL: '\r\n' }, (writeerr) => {
+    if (writeerr) log.error(writeerr);
+  });
+  log(chalk.green('updateExecution end'));
+}
+
 module.exports.main = main;
+module.exports.updateExecution = updateExecution;

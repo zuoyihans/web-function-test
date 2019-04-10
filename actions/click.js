@@ -1,19 +1,15 @@
 const { getScreenShotFileName } = require('../util/util');
+const { log } = require('../util/log');
+const { getObjectByXpath } = require('./getObject');
+const { takeScreenShot } = require('./takeScreenShot');
 
 async function actionClick(action) {
-  // console.log('actionClick', action.objectXpath);
-  const targetObject = await action.page.$x(action.objectXpath);
-  // console.log('actionClick', targetObject);
-  // console.log(login);
-  if (targetObject.length === 1) {
-    await targetObject[0].click();
-  } else {
-    throw new Error(`more than 1 object found of xpath ${action.objectXpath}`);
-  }
-  await action.page.screenshot({
-    path: getScreenShotFileName(action),
-    fullPage: true,
-  });
-};
+  log.debug('actionClick start', action.description);
+  const targetObject = await getObjectByXpath(action.page, action.objectXpath);
+  await targetObject.click();
+  await takeScreenShot(action.page, getScreenShotFileName(action));
+  log.debug('actionClick end', action.description);
+
+}
 
 module.exports.actionClick = actionClick;
