@@ -2,6 +2,7 @@ const { getScreenShotFileName } = require('../util/util');
 const { takeScreenShot } = require('./takeScreenShot');
 const { getObjectByXpath } = require('./getObject');
 const { log } = require('../util/log');
+const { actionResult } = require('./actionResult');
 
 async function actionCheckbox(action) {
   log.debug('actionCheckbox start', JSON.stringify(action.description));
@@ -15,6 +16,7 @@ async function actionCheckbox(action) {
   }
   await takeScreenShot(action.page, getScreenShotFileName(action));
   log.debug('actionCheckbox end');
+  return actionResult(action);
 }
 
 module.exports.actionCheckbox = actionCheckbox;

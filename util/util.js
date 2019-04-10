@@ -1,5 +1,5 @@
 const fs = require('fs');
-// const { log } = require('./log');
+const { log } = require('./log');
 
 function readJsonFile(filepath) {
   // log.debug('readJsonFile', filepath);
@@ -19,10 +19,25 @@ function getCasefilelist(files) {
   });
   return casefiles;
 }
+
 function getScreenShotFileName(action) {
-  return `${action.caseid}-${action.componentidx.toString().padStart(3, '0')}-${action.actionidx.toString().padStart(3, '0')}.png`;
+  return `${action.config.outputFolder}/${action.caseid}-${action.componentidx.toString().padStart(3, '0')}-${action.actionidx.toString().padStart(3, '0')}.png`;
+}
+
+function param2Value(ukey, action, params) {
+  log.debug('param2Value => before ', action.actionParam);
+  const replaceParam = { ...action };
+  if (replaceParam.actionParam && replaceParam.actionParam.startsWith('P_')) {
+    replaceParam.actionParam = params[ukey][replaceParam.actionParam];
+    while (replaceParam.actionParam.startsWith('G_')) {
+      replaceParam.actionParam = params[replaceParam.actionParam];
+    }
+  }
+  log.debug('param2Value => after ', replaceParam.actionParam);
+  return replaceParam;
 }
 
 module.exports.readJsonFile = readJsonFile;
 module.exports.getCasefilelist = getCasefilelist;
 module.exports.getScreenShotFileName = getScreenShotFileName;
+module.exports.param2Value = param2Value;

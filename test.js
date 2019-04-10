@@ -2,27 +2,17 @@ const puppeteer = require('puppeteer');
 const srs = require('secure-random-string');
 
 (async () => {
-  // const browser = await puppeteer.launch({ headless: false });
-  // const page = await browser.newPage();
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
+  await page.goto('https://github.com');
+  const title = await page.$x('/html/body/div[4]/main/div[1]/div/div/div[1]/h1');
 
-  const result = srs({
-    length: 8,
-    alphanumeric: true,
-  });
-  console.log(result);
-  
-
+  const text = await page.evaluate(xtitle => xtitle.textContent, title[0]);
+  console.log(text);
   // await browser.close();
 })();
 
 // 窗口切换
-  // const page1 = await browser.newPage();
-  // await page1.goto('https://github.com');
-  // const page2 = await browser.newPage();
-  // await page2.goto('https://www.baidu.com');
-  // const pages = await browser.pages();
-  // pages.forEach(async (page, index) => console.log(await page.title()));
-  // await pages[0].bringToFront();
 
 // frame + checkbox
 // await page.goto('http://www.w3school.com.cn/tiy/t.asp?f=html_input_checkbox');
