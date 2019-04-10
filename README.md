@@ -30,7 +30,7 @@ mkdir example/execution
 在component目录下，放做以下4个组件，内容就不详细解释了，看了基本应该可以明白
 
 001_打开github.json
-```JSON
+```json
 {
   "description": "打开github登录页面的URL",
   "actions": [
