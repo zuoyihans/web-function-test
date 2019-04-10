@@ -17,9 +17,9 @@ MAC + Node.JS环境，windows没试过也懒得试了
 npm install -g @cic-digital/web-function-test
 ```
 
-加入我们的测试对象是github，我们想登陆github，更改status为busy，再取消status
+假如我们的测试对象是github，我们想登陆github，更改status为busy，再取消status
 
-以下文件都可以在exapmle目录下找到
+注:以下文件都可以在exapmle目录下找到
 
 先创建2个目录，一个存放我们的自动化测试组件，一个存放测试用例和数据
 ```
@@ -148,7 +148,7 @@ case001_democase.json
   }
 ]
 ```
-从内容上就可以理解，我们要按顺序来执行这3个组件。
+从内容上就可以理解，我们要按顺序来执行这4个组件。
 
 创建一个配置文件config.json
 ```json
@@ -174,7 +174,7 @@ delay指定每个步骤执行间隔的等待时间，此处设定为10毫秒
 
 viewPort指定浏览器的长和宽
 
-运行一下命令format我们的case文件，以及创建参数文件，参数文件如存在，会响应更新，不会覆盖原有已经输入的参数
+运行一下命令format我们的case文件，以及创建参数文件，参数文件如存在，会相应更新，不会覆盖原有已经输入的参数
 ```
 updateExecution ./config.json
 ```
@@ -195,6 +195,8 @@ updateExecution ./config.json
   "bfqTchEQ": {}
 }
 ```
+
+注：qlZmNnZL为随机生成的key，各自不同，为执行程序做匹配用，请勿自行更改
 
 执行测试
 ```
