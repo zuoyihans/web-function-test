@@ -1,5 +1,5 @@
 /* eslint-disable no-await-in-loop */
-
+const jsonfile = require('jsonfile');
 const puppeteer = require('puppeteer');
 const { log } = require('../util/log');
 
@@ -46,11 +46,11 @@ class TestCase {
   //   return this.casefile;
   // }
 
-  get browser() {
+  getBrowser() {
     return this.browser || null;
   }
 
-  set browser(browser) {
+  setBrowser(browser) {
     this.browser = browser;
   }
 
@@ -66,24 +66,27 @@ class TestCase {
     paramAction.actionidx = this.currentActionIdx;
     paramAction.page = this.defaultPage;
     paramAction.config = this.config;
+    let actionResult;
     switch (paramAction.actionType) {
       case openUrl:
-        await actionOpenUrl(paramAction);
+        actionResult = await actionOpenUrl(paramAction);
         break;
       case input:
-        await actionInput(paramAction);
+        actionResult = await actionInput(paramAction);
         break;
       case click:
-        await actionClick(paramAction);
+        actionResult = await actionClick(paramAction);
         break;
       case checkbox:
-        await actionCheckbox(paramAction);
+        actionResult = await actionCheckbox(paramAction);
         break;
       case verifyText:
-        await actionVerifyText(paramAction);
+        actionResult = await actionVerifyText(paramAction);
+        break;
       default:
         throw new Error(`unknow action ${paramAction.actionType}`);
     }
+    return actionResult;
   }
 
   async executeComponent(component) {
@@ -138,6 +141,7 @@ class TestCase {
     }
     await this.browser.close();
     log.debug('execute end');
+    return this.componentresult;
   }
 }
 

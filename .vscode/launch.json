@@ -8,7 +8,14 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/index.js"
+      "program": "${workspaceFolder}/bin/runwebtest",
+      "args": [
+        "./config.json"
+      ],
+      "console": "integratedTerminal",
+      "env": {
+        "Loglevel": "Debug"
+      }
     }
   ]
 }

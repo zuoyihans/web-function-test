@@ -29,6 +29,7 @@
     "chalk": "^2.4.2",
     "jsonfile": "^5.0.0",
     "log": "^1.4.0",
+    "moment": "^2.24.0",
     "puppeteer": "^1.14.0",
     "secure-random-string": "^1.1.0"
   },

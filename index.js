@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 
 const fs = require('fs');
+const moment = require('moment');
 const srs = require('secure-random-string');
 const jsonfile = require('jsonfile');
 const chalk = require('chalk');
@@ -99,7 +100,11 @@ const {
 // }
 
 async function main(configpath) {
+  const timestamp = moment().format('YYYYMMDDhhmmss');
+
   const config = await readJsonFile(configpath);
+  config.outputFolder = `${config.outputFolder}/${timestamp}`;
+  fs.mkdirSync(config.outputFolder);
   const files = await fs.readdirSync(config.executionFolder);
   const casefilelist = getCasefilelist(files);
   for (let caseidx = 0; caseidx < casefilelist.length; caseidx += 1) {
