@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { main } = require('../index');
+const { main } = require('./index');
 
 (async () => {
   await main(process.argv[2]);

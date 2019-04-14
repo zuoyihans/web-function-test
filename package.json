@@ -7,7 +7,9 @@
     "bin": "./bin"
   },
   "bin": {
-    "launchui": "./UI/server.js"
+    "launchui": "./UI/server.js",
+    "runwebtest": "./runwebtest.js",
+    "updateExecution": "./updateExecution.js"
   },
   "main": "index.js",
   "scripts": {
