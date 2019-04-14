@@ -3,10 +3,14 @@ const { getScreenShotFileName } = require('../util/util');
 
 async function actionResult(action, resultStatus = 'Done') {
   const result = { ...action };
-  result.resullt = resultStatus;
+  result.result = resultStatus;
   result.screenShot = getScreenShotFileName(action);
   delete result.page;
-  log.debug('action result', JSON.stringify(result));
+  delete result.config;
+  delete result.actionidx;
+  delete result.componentidx;
+  delete result.caseid;
+  log.debug('action result => ', resultStatus);
   return result;
 }
 

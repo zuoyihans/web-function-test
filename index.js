@@ -16,89 +16,6 @@ const {
   getCasefilelist,
 } = require('./util/util');
 
-
-// const {
-//   openUrl,
-//   input,
-//   click,
-//   checkbox,
-// } = require('./util/constant');
-// const { actionOpenUrl } = require('./actions/openUrl');
-// const { actionInput } = require('./actions/input');
-// const { actionClick } = require('./actions/click');
-// const { actionCheckbox } = require('./actions/checkbox');
-
-// async function executeActions(page, data) {
-//   for (let actionidx = 0; actionidx < data.actions.length; actionidx += 1) {
-//     const action = data.actions[actionidx];
-//     const paramAction = { ...action };
-//     paramAction.caseid = data.caseid;
-//     paramAction.componentidx = data.componentidx + 1;
-//     paramAction.actionidx = actionidx + 1;
-//     paramAction.page = page;
-//     switch (paramAction.actionType) {
-//       case openUrl:
-//         await actionOpenUrl(paramAction);
-//         break;
-//       case input:
-//         await actionInput(paramAction);
-//         break;
-//       case click:
-//         await actionClick(paramAction);
-//         break;
-//       case checkbox:
-//         await actionCheckbox(paramAction);
-//         break;
-//       default:
-//         throw new Error(`unknow action ${paramAction.actionType}`);
-//     }
-//   }
-// }
-
-// async function executeTest(casefile, config) {
-//   const params = await readJsonFile(`${config.executionFolder}/param.json`);
-//   const caseinfo = await readJsonFile(`${config.executionFolder}/${casefile}`);
-//   const caseid = casefile.replace('.json', '');
-//   const width = config.viewPort.width || 1280;
-//   const height = config.viewPort.height || 768;
-//   const browser = await puppeteer.launch(
-//     {
-//       headless: config.headless,
-//       ignoreHTTPSErrors: true,
-//       args: [`--window-size=12${width},${height}`],
-//       defaultViewport: {
-//         width,
-//         height,
-//       },
-//       slowMo: config.delay,
-//     },
-//   );
-//   const page = await browser.newPage();
-//   // const page = {};
-//   for (let index = 0; index < caseinfo.length; index += 1) {
-//     const component = caseinfo[index];
-//     const componentinfo = await readJsonFile(`${config.componentFolder}/${component.component}.json`);
-//     const componentidx = index;
-//     const actions = componentinfo.actions.map((action) => {
-//       const replaceParam = { ...action };
-//       if (replaceParam.actionParam && replaceParam.actionParam.startsWith('P_')) {
-//         replaceParam.actionParam = params[component.ukey][replaceParam.actionParam];
-//       }
-//       return replaceParam;
-//     });
-//     await executeActions(
-//       page,
-//       {
-//         caseid,
-//         componentidx,
-//         actions,
-//       },
-//     );
-//   }
-//   // await browser.close();
-//   return '';
-// }
-
 async function main(configpath) {
   const timestamp = moment().format('YYYYMMDDhhmmss');
 
@@ -107,11 +24,18 @@ async function main(configpath) {
   fs.mkdirSync(config.outputFolder);
   const files = await fs.readdirSync(config.executionFolder);
   const casefilelist = getCasefilelist(files);
+  const allresult = [];
   for (let caseidx = 0; caseidx < casefilelist.length; caseidx += 1) {
+    log(chalk.green(`Case No${caseidx + 1} start`));
     const casefile = casefilelist[caseidx];
     const testcase = new TestCase(casefile, config);
-    await testcase.execute();
+    const caseresult = await testcase.execute();
+    allresult.push(caseresult);
+    log(chalk.green(`Case No${caseidx + 1} end`));
   }
+  jsonfile.writeFile(`${config.outputFolder}/testresult.json`, allresult, { spaces: 2, EOL: '\r\n' }, (writeerr) => {
+    if (writeerr) log.error(writeerr);
+  });
 }
 
 async function updateExecution(configpath) {

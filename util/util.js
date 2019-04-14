@@ -25,15 +25,17 @@ function getScreenShotFileName(action) {
 }
 
 function param2Value(ukey, action, params) {
-  log.debug('param2Value => before ', action.actionParam);
   const replaceParam = { ...action };
-  if (replaceParam.actionParam && replaceParam.actionParam.startsWith('P_')) {
-    replaceParam.actionParam = params[ukey][replaceParam.actionParam];
-    while (replaceParam.actionParam.startsWith('G_')) {
-      replaceParam.actionParam = params[replaceParam.actionParam];
+  if (action.actionParam) {
+    log.debug('param2Value => before ', action.actionParam);
+    if (replaceParam.actionParam && replaceParam.actionParam.startsWith('P_')) {
+      replaceParam.actionParam = params[ukey][replaceParam.actionParam];
+      while (replaceParam.actionParam.startsWith('G_')) {
+        replaceParam.actionParam = params[replaceParam.actionParam];
+      }
     }
+    log.debug('param2Value => after ', replaceParam.actionParam);
   }
-  log.debug('param2Value => after ', replaceParam.actionParam);
   return replaceParam;
 }
 

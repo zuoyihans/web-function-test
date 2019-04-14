@@ -86,37 +86,38 @@ class TestCase {
       default:
         throw new Error(`unknow action ${paramAction.actionType}`);
     }
+    log.debug('executeAction', action.actionType, action.actionParam || '', 'end');
     return actionResult;
   }
 
   async executeComponent(component) {
-    log.debug('execute component no', this.currentComponentIdx);
     const componentinfo = { ...component };
     componentinfo.actions = component.actions.map(
       action => param2Value(component.ukey, action, this.params),
     );
-    log.debug('actions', JSON.stringify(componentinfo.actions));
-
+    log.debug(`${componentinfo.actions.length} actions will be executed`);
     // log.debug('executeComponent', componentinfo.actions);
     componentinfo.actionresults = [];
     for (let actionidx = 0; actionidx < componentinfo.actions.length; actionidx += 1) {
       this.currentActionIdx = actionidx + 1;
+      log.debug(`Action No${this.currentActionIdx} start`);
       const singleactionresult = await this.executeAction(componentinfo.actions[actionidx]);
       componentinfo.actionresults.push(singleactionresult);
+      log.debug(`Action No${this.currentActionIdx} end`);
     }
+    delete componentinfo.actions;
     return componentinfo;
   }
 
   async execute() {
-    log.debug('execute start');
     const width = this.config.viewPort.width || 1280;
     const height = this.config.viewPort.height || 768;
-    log.debug('launch puppeteer');
+    log.debug(`launch puppeteer => headless mode:${this.config.headless} viewport ${width}*${height} delay ${this.config.delay / 1000}s for each step`);
     this.browser = await puppeteer.launch(
       {
         headless: this.config.headless,
         ignoreHTTPSErrors: true,
-        args: [`--window-size=12${width},${height}`],
+        args: [`--window-size=${width},${height}`],
         defaultViewport: {
           width,
           height,
@@ -124,7 +125,6 @@ class TestCase {
         slowMo: this.config.delay,
       },
     );
-    log.debug('create blank page');
     this.defaultPage = await this.browser.newPage();
     // const page = {};
     this.components = this.caseinfo.map((component) => {
@@ -132,16 +132,21 @@ class TestCase {
       componentdetail.ukey = component.ukey;
       return componentdetail;
     });
-    log.debug(`${this.components.length} components found`, JSON.stringify(this.components));
+    log.debug(`${this.components.length} components found`);
     this.componentresult = [];
     for (let componentidx = 0; componentidx < this.components.length; componentidx += 1) {
       this.currentComponentIdx = componentidx + 1;
+      log.debug(`Component No${this.currentComponentIdx}:  ${this.components[componentidx].description} start`);
       const singleresult = await this.executeComponent(this.components[componentidx]);
       this.componentresult.push(singleresult);
+      log.debug(`Component No${this.currentComponentIdx} ${this.components[componentidx].description} end`);
     }
     await this.browser.close();
     log.debug('execute end');
-    return this.componentresult;
+    return {
+      caseid: this.caseid,
+      component: this.componentresult,
+    };
   }
 }
 
