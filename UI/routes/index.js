@@ -11,8 +11,9 @@ const { log } = require('../../util/log');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.json(JSON.parse(process.env.globalConfig));
+  res.render('main');
 });
+
 
 router.get('/components', (req, res) => {
   const { componentFolder } = JSON.parse(process.env.globalConfig);
