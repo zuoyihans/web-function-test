@@ -1,7 +1,7 @@
 {
   "componentFolder": "./example/component",
   "executionFolder": "./example/execution",
-  "headless": true,
+  "headless": false,
   "delay": 10,
   "viewPort": {
     "width": 1280,

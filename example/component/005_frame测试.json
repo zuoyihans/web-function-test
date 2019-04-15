@@ -1,0 +1,17 @@
+{
+  "description": "frame测试",
+  "actions": [
+    {
+      "description": "打开url",
+      "actionType": "openUrl",
+      "actionParam": "P_w3schoolurl"
+    },
+    {
+      "description": "勾选",
+      "actionType": "checkbox",
+      "actionParam": "P_CheckBoxStatus",
+      "objectXpath": "/html/body/form/input[1]",
+      "frame": "i"
+    }
+  ]
+}

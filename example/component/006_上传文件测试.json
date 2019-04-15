@@ -1,0 +1,16 @@
+{
+  "description": "frame测试",
+  "actions": [
+    {
+      "description": "打开url",
+      "actionType": "openUrl",
+      "actionParam": "P_gaitubaourl"
+    },
+    {
+      "description": "上传",
+      "actionType": "fileUpload",
+      "actionParam": "P_UploadFilePath",
+      "objectXpath": "//*[@id=\"file-upload\"]"
+    }
+  ]
+}

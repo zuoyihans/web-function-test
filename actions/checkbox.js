@@ -6,13 +6,18 @@ const { actionResult } = require('./actionResult');
 
 async function actionCheckbox(action) {
   log.debug('actionCheckbox start', JSON.stringify(action.description));
-  const targetCheckBox = await getObjectByXpath(action.page, action.objectXpath);
-  const currentStatus = await action.page.evaluate(el => el.checked, targetCheckBox);
+  const { frame, object } = await getObjectByXpath(action);
+  let currentStatus;
+  if (frame) {
+    currentStatus = await frame.evaluate(el => el.checked, object);
+  } else {
+    currentStatus = await action.page.evaluate(el => el.checked, object);
+  }
   log.debug('currentStatus', currentStatus);
   const desiredStatus = action.actionParam === 'Checked' || false;
   log.debug('desiredStatus', desiredStatus);
   if (currentStatus !== desiredStatus) {
-    await targetCheckBox.click();
+    await object.click();
   }
   await takeScreenShot(action.page, getScreenShotFileName(action));
   log.debug('actionCheckbox end');

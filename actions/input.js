@@ -7,8 +7,8 @@ const { actionResult } = require('./actionResult');
 
 async function actionInput(action) {
   // console.log('actionInput', JSON.stringify(action));
-  const targetObject = await getObjectByXpath(action.page, action.objectXpath);
-  await targetObject.type(action.actionParam);
+  const { object } = await getObjectByXpath(action);
+  await object.type(action.actionParam);
   await takeScreenShot(action.page, getScreenShotFileName(action));
   return actionResult(action);
 }

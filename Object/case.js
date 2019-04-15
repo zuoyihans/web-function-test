@@ -1,5 +1,4 @@
 /* eslint-disable no-await-in-loop */
-const jsonfile = require('jsonfile');
 const puppeteer = require('puppeteer');
 const { log } = require('../util/log');
 
@@ -13,12 +12,16 @@ const {
   click,
   checkbox,
   verifyText,
+  fileUpload,
+  select,
 } = require('../util/constant');
 const { actionOpenUrl } = require('../actions/openUrl');
 const { actionInput } = require('../actions/input');
 const { actionClick } = require('../actions/click');
 const { actionCheckbox } = require('../actions/checkbox');
 const { actionVerifyText } = require('../actions/verifyText');
+const { actionFileUpload } = require('../actions/fileUpload');
+const { actionSelect } = require('../actions/select');
 
 class TestCase {
   constructor(casefile, config) {
@@ -82,6 +85,12 @@ class TestCase {
         break;
       case verifyText:
         actionResult = await actionVerifyText(paramAction);
+        break;
+      case fileUpload:
+        actionResult = await actionFileUpload(paramAction);
+        break;
+      case select:
+        actionResult = await actionSelect(paramAction);
         break;
       default:
         throw new Error(`unknow action ${paramAction.actionType}`);

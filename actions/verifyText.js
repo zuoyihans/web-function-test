@@ -7,8 +7,13 @@ const { actionResult } = require('./actionResult');
 
 async function actionVerifyText(action) {
   // console.log('actionInput', JSON.stringify(action));
-  const targetObject = await getObjectByXpath(action.page, action.objectXpath);
-  const text = await action.page.evaluate(object => object.textContent, targetObject);
+  const { frame, object } = await getObjectByXpath(action);
+  let text;
+  if (frame) {
+    text = await frame.evaluate(targetObject => targetObject.textContent, object);
+  } else {
+    text = await action.page.evaluate(targetObject => targetObject.textContent, object);
+  }
   let result;
   if (text !== action.actionParam) {
     result = actionResult(action, 'NG');

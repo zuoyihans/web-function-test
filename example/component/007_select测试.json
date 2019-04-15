@@ -1,0 +1,17 @@
+{
+  "description": "frame测试",
+  "actions": [
+    {
+      "description": "打开url",
+      "actionType": "openUrl",
+      "actionParam": "P_selecturl"
+    },
+    {
+      "description": "选下拉框",
+      "actionType": "select",
+      "actionParam": "P_ValueForSelect",
+      "selectLocator": "name=\"cars\"",
+      "frame": "i"
+    }
+  ]
+}
