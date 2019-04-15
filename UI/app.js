@@ -11,7 +11,6 @@ const cors = require('cors');
 const { log } = require('../util/log');
 const index = require('./routes/index');
 
-
 // ADD END
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);

@@ -7,9 +7,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.json({
-    ok: 'ok',
-  });
+  res.json(JSON.parse(process.env.Test));
 });
 
 module.exports = router;
