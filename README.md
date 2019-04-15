@@ -176,7 +176,7 @@ viewPort指定浏览器的长和宽
 
 运行一下命令format我们的case文件，以及创建参数文件，参数文件如存在，会相应更新，不会覆盖原有已经输入的参数
 ```
-updateExecution ./config.json
+updateExecution --config=./config.json
 ```
 
 执行完后可以在execution目录下找到param.json文件,填入相应的值
@@ -198,9 +198,15 @@ updateExecution ./config.json
 
 注：qlZmNnZL为随机生成的key，各自不同，为执行程序做匹配用，请勿自行更改
 
+以上的json文件都可以通过webui来编辑生成(WIP)
+```
+lanuchui  --componentFolder=./example/component --executionFolder=./example/execution --outputFolder=./example/output
+```
+
 执行测试
 ```
-runwebtest ./config.json
+runwebtest --config=./config.json
 ```
+
 
 执行完毕后，可以在当前目录找到截图
