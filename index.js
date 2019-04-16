@@ -109,7 +109,7 @@ function initConfig(configFileName) {
   const sampleconfig = {
     componentFolder,
     executionFolder,
-    headless: true,
+    headless: false,
     delay: 10,
     viewPort: {
       width: 1280,
