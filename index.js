@@ -94,13 +94,9 @@ async function updateExecution(configpath) {
     });
     log(chalk.cyan('searching param end'));
 
-    jsonfile.writeFile(`${executionFolder}/${singlecase}`, updatedContent, { spaces: 2, EOL: '\r\n' }, (writeerr) => {
-      if (writeerr) log.error(writeerr);
-    });
+    jsonfile.writeFileSync(`${executionFolder}/${singlecase}`, updatedContent, { spaces: 2, EOL: '\r\n' });
   });
-  jsonfile.writeFile(`${executionFolder}/param.json`, params, { spaces: 2, EOL: '\r\n' }, (writeerr) => {
-    if (writeerr) log.error(writeerr);
-  });
+  jsonfile.writeFileSync(`${executionFolder}/param.json`, params, { spaces: 2, EOL: '\r\n' });
   log(chalk.green('updateExecution end'));
 }
 
@@ -113,7 +109,7 @@ function initConfig(configFileName) {
   const sampleconfig = {
     componentFolder,
     executionFolder,
-    headless: false,
+    headless: true,
     delay: 10,
     viewPort: {
       width: 1280,
