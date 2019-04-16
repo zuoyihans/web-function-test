@@ -11,6 +11,14 @@ const { initConfig } = require('./index');
 const {
   readJsonFile,
 } = require('./util/util');
+const { main } = require('./index');
+
+let validCommand = false;
+
+async function runtest(configFileName) {
+  const targetConfigFile = configFileName.config || 'config.json';
+  await main(targetConfigFile);
+}
 
 async function launchui(configFileName) {
   const port = process.env.PORT || '3000';
@@ -32,12 +40,26 @@ program.version(pkg.version)
 program
   .command('init')
   .option('-c, --config [config_file]', 'Specify config file name')
-  .action(initConfig);
+  .action((cmd) => {
+    validCommand = true;
+    initConfig(cmd);
+  });
 
 program
   .command('ui')
   .option('-c, --config [config_file]', 'Specify config file name')
-  .action(launchui);
+  .action((cmd) => {
+    validCommand = true;
+    launchui(cmd);
+  });
+
+program
+  .command('run')
+  .option('-c, --config [config_file]', 'Specify config file name')
+  .action((cmd) => {
+    validCommand = true;
+    runtest(cmd);
+  });
 
 function displayUsage() {
   process.exit(1);
@@ -46,3 +68,8 @@ function displayUsage() {
 program.on('--help', displayUsage);
 
 program.parse(process.argv);
+
+if (!validCommand) {
+  program.outputHelp();
+}
+// console.log(program.command);
