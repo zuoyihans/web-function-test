@@ -72,7 +72,7 @@ async function runtest(configFileName) {
 }
 
 async function launchui(configFileName) {
-  const port = process.env.PORT || '3000';
+  const port = process.env.PORT || '6666';
   const targetConfigFile = configFileName.config || 'config.json';
   const configs = await readJsonFile(targetConfigFile);
   app.listen(port, () => {
