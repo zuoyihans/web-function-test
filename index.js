@@ -104,5 +104,52 @@ async function updateExecution(configpath) {
   log(chalk.green('updateExecution end'));
 }
 
+function initConfig(configFileName) {
+  const targetConfigFile = configFileName.config || 'config.json';
+  log(chalk.green(`trying to init config file ${targetConfigFile}`));
+  const componentFolder = './component';
+  const executionFolder = './execution';
+  const outputFolder = './output';
+  const sampleconfig = {
+    componentFolder,
+    executionFolder,
+    headless: false,
+    delay: 10,
+    viewPort: {
+      width: 1280,
+      height: 768,
+    },
+    outputFolder,
+  };
+  const paramexists = fs.existsSync(targetConfigFile);
+  if (paramexists) {
+    log(chalk.red(`${targetConfigFile} exists , backup it before you run wft init`));
+  } else {
+    jsonfile.writeFile(targetConfigFile, sampleconfig, { spaces: 2, EOL: '\r\n' }, (writeerr) => {
+      if (writeerr) {
+        log(chalk.red(writeerr));
+      } else {
+        log(chalk.green(`${targetConfigFile} created`));
+        if (!fs.existsSync(componentFolder)) {
+          log(chalk.green(`${componentFolder} created`));
+          fs.mkdirSync(componentFolder);
+        }
+        if (!fs.existsSync(executionFolder)) {
+          log(chalk.green(`${executionFolder} created`));
+          fs.mkdirSync(executionFolder);
+        }
+        if (!fs.existsSync(outputFolder)) {
+          log(chalk.green(`${outputFolder} created`));
+          fs.mkdirSync(outputFolder);
+        }
+        log(chalk.green(`${targetConfigFile} created`));
+        log(chalk.whiteBright('for more help about config, please check'));
+        log(chalk.whiteBright('https://github.com/k19810703/web-function-test/blob/master/configReadMe.md'));
+      }
+    });
+  }
+}
+
 module.exports.main = main;
 module.exports.updateExecution = updateExecution;
+module.exports.initConfig = initConfig;

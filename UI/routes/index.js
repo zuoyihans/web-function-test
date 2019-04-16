@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 
 router.get('/components', (req, res) => {
-  const { componentFolder } = JSON.parse(process.env.globalConfig);
+  const { componentFolder } = process.env;
   const componentfiles = fs.readdirSync(componentFolder);
   res.json({
     componentFolder,
@@ -25,7 +25,7 @@ router.get('/components', (req, res) => {
 });
 
 router.get('/cases', (req, res) => {
-  const { executionFolder } = JSON.parse(process.env.globalConfig);
+  const { executionFolder } = process.env;
   const files = fs.readdirSync(executionFolder);
   const casefilelist = getCasefilelist(files);
   res.json({
@@ -35,7 +35,7 @@ router.get('/cases', (req, res) => {
 });
 
 router.get('/paramfile', (req, res) => {
-  const { executionFolder } = JSON.parse(process.env.globalConfig);
+  const { executionFolder } = process.env;
   const paramexists = fs.existsSync(`${executionFolder}/param.json`);
   if (paramexists) {
     res.json({
@@ -48,19 +48,19 @@ router.get('/paramfile', (req, res) => {
 });
 
 router.get('/component/:filename', (req, res) => {
-  const { executionFolder } = JSON.parse(process.env.globalConfig);
+  const { executionFolder } = process.env;
   const caseinfo = readJsonFile(`${executionFolder}/${req.params.filename}`);
   res.json(caseinfo);
 });
 
 router.get('/paramdata', (req, res) => {
-  const { executionFolder } = JSON.parse(process.env.globalConfig);
+  const { executionFolder } = process.env;
   const paramdata = readJsonFile(`${executionFolder}/param.json`);
   res.json(paramdata);
 });
 
 router.get('/case/:filename', (req, res) => {
-  const { componentFolder } = JSON.parse(process.env.globalConfig);
+  const { componentFolder } = process.env;
   const componentinfo = readJsonFile(`${componentFolder}/${req.params.filename}`);
   res.json(componentinfo);
 });

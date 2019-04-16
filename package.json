@@ -9,7 +9,8 @@
   "bin": {
     "launchui": "./UI/server.js",
     "runwebtest": "./runwebtest.js",
-    "updateExecution": "./updateExecution.js"
+    "updateExecution": "./updateExecution.js",
+    "wft": "./wft.js"
   },
   "main": "index.js",
   "scripts": {
