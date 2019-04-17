@@ -10,7 +10,6 @@ pids
 *.pid
 *.seed
 *.pid.lock
-*.png
 param.json
 error_page.html
 output
