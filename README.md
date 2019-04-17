@@ -29,6 +29,8 @@ wft init
 wft example
 ```
 
+注意：wft example 命令无法重复使用，请删除目录下所有文件后从init命令开始做，也不要在现有测试用例目录下执行example命令
+
 等待param.json文件打开，如果没有自动打开，请手动打开./execution/param.json，并在合适的地方输入你的github账号和密码
 
 Every this is fine, just run your test
@@ -40,3 +42,20 @@ wft run
 ## what happened
 
 请参考component目录和execution目录下的文件，你只需要定制你的业务逻辑，就可以轻松的自动化测试啦
+
+##  Basic Concept
+![avatar](basiconcept.png)
+
+## how to use it(WIP)
+此功能还在开发中
+```
+wft ui
+```
+
+默认使用3000端口，如果端口占用
+```
+PORT={PORT} wft ui
+```
+{PORT}换成你希望的端口
+
+在用户界面编辑业务逻辑component和测试用例case
