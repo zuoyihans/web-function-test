@@ -44,7 +44,7 @@ wft run
 请参考component目录和execution目录下的文件，你只需要定制你的业务逻辑，就可以轻松的自动化测试啦
 
 ##  Basic Concept
-![avatar](basiconcept.png)
+![avatar](basicconcept.png)
 
 ## how to use it(WIP)
 此功能还在开发中
