@@ -17,14 +17,12 @@ MAC + Node.JS环境，windows没试过也懒得试了
 npm install -g @cic-digital/web-function-test
 ```
 
-为了方便说明，假设我们的测试对象是github，我们想登陆github，更改status为busy，再取消status
-
 打开命令行工具，找到一个空目录，先初始化测试工具
 ```
 wft init
 ```
 
-生成example必要的文件
+生成example必要的文件
 ```
 wft example
 ```
