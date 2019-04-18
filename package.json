@@ -1,7 +1,7 @@
 {
   "name": "@cic-digital/web-function-test",
   "preferGlobal": true,
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "",
   "directories": {
     "bin": "./bin"
