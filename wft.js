@@ -50,10 +50,6 @@ async function createExample(configFileName) {
     params[componentkeys[1]].P_ExpectStatus = 'Checked';
     params[componentkeys[1]].P_ValueForSelect = 'United States';
     jsonfile.writeFileSync(`${executionFolder}/param.json`, params, { spaces: 2, EOL: '\r\n' });
-    open(`${executionFolder}/param.json`);
-
-    log(chalk.whiteBright(''));
-    log(chalk.whiteBright(`please wait until param.json to be open ,if it is not opened ,please open ${executionFolder}/param.json, and input your github user/password`));
   }
 }
 
