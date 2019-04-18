@@ -1,0 +1,34 @@
+{
+    "description": "打开URL",
+    "actions": [
+      {
+        "description": "验证title",
+        "actionType": "verifyText",
+        "objectXpath": "/html/body/div/div[1]/h2",
+        "actionParam": "P_ExpectTitle" 
+      },
+      {
+        "description": "输入名",
+        "actionType": "input",
+        "objectXpath": "//*[@id=\"firstName\"]",
+        "actionParam": "P_FirstName" 
+      },
+      {
+        "description": "勾选checkbox",
+        "actionType": "checkbox",
+        "objectXpath": "//*[@id=\"save-info\"]",
+        "actionParam": "P_ExpectStatus" 
+      },
+      {
+        "description": "选下拉框",
+        "actionType": "select",
+        "actionParam": "P_ValueForSelect",
+        "selectLocator": "id=\"country\""
+      },
+      {
+        "description": "点button",
+        "actionType": "click",
+        "objectXpath": "/html/body/div/div[2]/div[2]/form/button"
+      }
+    ]
+  }

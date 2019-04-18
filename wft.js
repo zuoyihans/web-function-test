@@ -7,23 +7,15 @@ const fs = require('fs');
 const app = require('./UI/app');
 const pkg = require('./package.json');
 
-const sampleComponent1 = require('./example/component/001_打开github.json');
-const sampleComponent2 = require('./example/component/002_登录github.json');
-const sampleComponent3 = require('./example/component/003_设置status.json');
-const sampleComponent4 = require('./example/component/004_清除status.json');
+const sampleComponent1 = require('./example/component/001_打开url.json');
+const sampleComponent2 = require('./example/component/002_基本操作.json');
 
 const sampleCase = [
   {
-    component: '001_打开github',
+    component: '001_打开url',
   },
   {
-    component: '002_登录github',
-  },
-  {
-    component: '003_设置status',
-  },
-  {
-    component: '004_清除status',
+    component: '002_基本操作',
   },
 ];
 
@@ -46,18 +38,17 @@ async function createExample(configFileName) {
   } else {
     const configs = readJsonFile(targetConfigFile);
     const { componentFolder, executionFolder } = configs;
-    jsonfile.writeFileSync(`${componentFolder}/001_打开github.json`, sampleComponent1, { spaces: 2, EOL: '\r\n' });
-    jsonfile.writeFileSync(`${componentFolder}/002_登录github.json`, sampleComponent2, { spaces: 2, EOL: '\r\n' });
-    jsonfile.writeFileSync(`${componentFolder}/003_设置status.json`, sampleComponent3, { spaces: 2, EOL: '\r\n' });
-    jsonfile.writeFileSync(`${componentFolder}/004_清除status.json`, sampleComponent4, { spaces: 2, EOL: '\r\n' });
+    jsonfile.writeFileSync(`${componentFolder}/001_打开url.json`, sampleComponent1, { spaces: 2, EOL: '\r\n' });
+    jsonfile.writeFileSync(`${componentFolder}/002_基本操作.json`, sampleComponent2, { spaces: 2, EOL: '\r\n' });
     jsonfile.writeFileSync(`${executionFolder}/case001_samplecase.json`, sampleCase, { spaces: 2, EOL: '\r\n' });
     await updateExecution(targetConfigFile);
     const params = readJsonFile(`${executionFolder}/param.json`);
     const componentkeys = Object.keys(params);
-    params[componentkeys[0]].P_GitHubUrl = 'http://github.com/login';
-    params[componentkeys[1]].P_UserName = 'input your github user here';
-    params[componentkeys[1]].P_Password = 'input your github password here';
-    params[componentkeys[2]].P_BusyCheckBox = 'Checked';
+    params[componentkeys[0]].P_Url = 'https://getbootstrap.com/docs/4.3/examples/checkout/';
+    params[componentkeys[1]].P_ExpectTitle = 'Checkout form';
+    params[componentkeys[1]].P_FirstName = 'firstname';
+    params[componentkeys[1]].P_ExpectStatus = 'Checked';
+    params[componentkeys[1]].P_ValueForSelect = 'United States';
     jsonfile.writeFileSync(`${executionFolder}/param.json`, params, { spaces: 2, EOL: '\r\n' });
     open(`${executionFolder}/param.json`);
 
@@ -69,6 +60,11 @@ async function createExample(configFileName) {
 async function runtest(configFileName) {
   const targetConfigFile = configFileName.config || 'config.json';
   await main(targetConfigFile);
+}
+
+async function updateParam(configFileName) {
+  const targetConfigFile = configFileName.config || 'config.json';
+  await updateExecution(targetConfigFile);
 }
 
 async function launchui(configFileName) {
@@ -110,6 +106,14 @@ program
   .action((cmd) => {
     validCommand = true;
     createExample(cmd);
+  });
+
+program
+  .command('updateParam')
+  .option('-c, --config [config_file]', 'Specify config file name')
+  .action((cmd) => {
+    validCommand = true;
+    updateParam(cmd);
   });
 
 program
