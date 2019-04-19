@@ -1,5 +1,5 @@
 {
-    "description": "打开URL",
+    "description": "基本操作demo",
     "actions": [
       {
         "description": "验证title",
