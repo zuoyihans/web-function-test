@@ -48,6 +48,9 @@ async function createExample(configFileName) {
     params[componentkeys[1]].P_FirstName = 'firstname';
     params[componentkeys[1]].P_ExpectStatus = 'Checked';
     params[componentkeys[1]].P_ValueForSelect = 'United States';
+    params[componentkeys[1]].P_ExpectAmount = '$12';
+    params[componentkeys[1]].P_CartName = 'Product name';
+
     jsonfile.writeFileSync(`${executionFolder}/param.json`, params, { spaces: 2, EOL: '\r\n' });
   }
 }
