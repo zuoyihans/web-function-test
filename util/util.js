@@ -1,4 +1,6 @@
 const fs = require('fs');
+const format = require('string-format');
+
 const { log } = require('./log');
 
 function readJsonFile(filepath) {
@@ -31,11 +33,22 @@ function param2Value(ukey, action, params) {
     if (replaceParam.actionParam && replaceParam.actionParam.startsWith('P_')) {
       replaceParam.actionParam = params[ukey][replaceParam.actionParam];
       while (replaceParam.actionParam.startsWith('G_')) {
-        replaceParam.actionParam = params[replaceParam.actionParam];
+        replaceParam.actionParam = params[ukey][replaceParam.actionParam];
       }
     }
     log.debug('param2Value => after ', replaceParam.actionParam);
   }
+  if (action.objectParams) {
+    log.debug('param2Value(object) => before ', action.objectXpath);
+    const objectParams = Object.keys(action.objectParams);
+    objectParams.forEach((objectParam) => {
+      replaceParam.objectParams[objectParam] = params[ukey][objectParam];
+    });
+    log.debug(replaceParam.objectParams);
+    replaceParam.objectXpath = format(action.objectXpath, replaceParam.objectParams);
+    log.debug('param2Value(object) => after ', replaceParam.objectXpath);
+  }
+
   return replaceParam;
 }
 

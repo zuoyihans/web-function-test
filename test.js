@@ -10,24 +10,24 @@ const puppeteer = require('puppeteer');
         width: 1280,
         height: 768,
       },
+      slowMo: 30,
     },
   );
-  // const page = (await browser.pages())[0];
-  // await page.goto('http://www.baidu.com');
   const page = await browser.newPage();
-  await page.goto('http://www.w3school.com.cn/tiy/t.asp?f=html_elements_select');
-  const frames = await page.frames();
-  let myframe;
-  for (let i = 0; i < frames.length; i += 1) {
-    const framename = frames[i].name();
-    console.log(framename);
-    if (framename === 'i') {
-      myframe = frames[i];
-      break;
-    }
-  }
-  await myframe.select('select[name="cars"]', 'saab'); // single selection
-  console.log(myframe.name());
+  await page.goto('https://w3.ibm.com/');
+  await page.waitForXPath('/html/body/div[3]/header/div[5]/div/button/strong');
+  const signin = await page.$x('/html/body/div[3]/header/div[5]/div/button/strong');
+  await signin[0].click();
+  await page.waitForXPath('//*[@id="desktop"]');
+  const username = await page.$x('//*[@id="desktop"]');
+  const password = await page.$x('//*[@id="body"]/div[1]/div[2]/div/div/form/input[4]');
+  await username[0].type('wuhd@cn.ibm.com');
+  await password[0].type('12345');
+  await page.waitForXPath('//*[@id="btn_signin"]');
+
+  const button = await page.$x('//*[@id="btn_signin"]');
+  console.log(button);
+  await button[0].click();
 })();
 
 // 窗口切换

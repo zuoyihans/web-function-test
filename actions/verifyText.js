@@ -3,7 +3,7 @@ const { getObjectByXpath } = require('./getObject');
 const { takeScreenShot } = require('./takeScreenShot');
 const { actionResult } = require('./actionResult');
 
-// const { log } = require('../util/log');
+const { log } = require('../util/log');
 
 async function actionVerifyText(action) {
   // console.log('actionInput', JSON.stringify(action));
@@ -15,6 +15,7 @@ async function actionVerifyText(action) {
     text = await action.page.evaluate(targetObject => targetObject.textContent, object);
   }
   let result;
+  log.debug(`actual text [${text}] , expect text [${action.actionParam}]`);
   if (text !== action.actionParam) {
     result = actionResult(action, 'NG');
   } else {

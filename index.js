@@ -78,12 +78,15 @@ async function updateExecution(configpath) {
         log(chalk.cyan(`searching ${componentinfo.description} => ${action.description}`));
         if (action.actionParam) {
           log(chalk.cyan(`checking action param ${action.actionParam} in params`));
-          if (!has.call(params[content.ukey], action.actionParam)) {
-            params[content.ukey][action.actionParam] = '';
+          if (action.actionParam.startsWith('P_') || action.actionParam.startsWith('P_')) {
+            if (!has.call(params[content.ukey], action.actionParam)) {
+              params[content.ukey][action.actionParam] = '';
+            }
           }
         }
         if (action.objectParams) {
-          action.objectParams.forEach((objectParam) => {
+          const objectParams = Object.keys(action.objectParams);
+          objectParams.forEach((objectParam) => {
             log(chalk.cyan(`checking object param ${objectParam} in params`));
             if (!has.call(params[content.ukey], objectParam)) {
               params[content.ukey][objectParam] = '';

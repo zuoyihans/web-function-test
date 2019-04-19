@@ -5,7 +5,7 @@
         "description": "验证title",
         "actionType": "verifyText",
         "objectXpath": "/html/body/div/div[1]/h2",
-        "actionParam": "P_ExpectTitle" 
+        "actionParam": "Checkout form" 
       },
       {
         "description": "输入名",
@@ -29,6 +29,15 @@
         "description": "点button",
         "actionType": "click",
         "objectXpath": "/html/body/div/div[2]/div[2]/form/button"
+      },
+      {
+        "description": "验证金额",
+        "actionType": "verifyText",
+        "actionParam": "P_ExpectAmount",
+        "objectXpath": "/html/body/div/div[2]/div[1]/ul/li/div/h6[contains(.,'{P_CartName}')]/ancestor::li/span",
+        "objectParams": {
+          "P_CartName": "P_CartName"
+        }
       }
     ]
   }

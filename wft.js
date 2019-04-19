@@ -45,7 +45,6 @@ async function createExample(configFileName) {
     const params = readJsonFile(`${executionFolder}/param.json`);
     const componentkeys = Object.keys(params);
     params[componentkeys[0]].P_Url = 'https://getbootstrap.com/docs/4.3/examples/checkout/';
-    params[componentkeys[1]].P_ExpectTitle = 'Checkout form';
     params[componentkeys[1]].P_FirstName = 'firstname';
     params[componentkeys[1]].P_ExpectStatus = 'Checked';
     params[componentkeys[1]].P_ValueForSelect = 'United States';
