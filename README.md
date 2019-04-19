@@ -12,7 +12,7 @@
 </video>
 
 ## 前提
-MAC + Node.JS环境，windows没试过也懒得试了
+MAC + Node.JS环境，windows似乎也可以
 
 ## quick start
 
