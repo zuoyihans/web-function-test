@@ -7,7 +7,7 @@
 
 还在开发过程，目前只能演示一下到底能干啥。演示用的是bootstrap的example
 
-<iframe height=498 width=510 src='http://file.chinacic-next.com/demo.mov' frameborder=0 'allowfullscreen'></iframe>
+<iframe height=498 width=510 src='http://file.chinacic-next.com/demo.mov' frameborder=0 'allowfullscreen'>aa</iframe>
 
 
 ## 前提
