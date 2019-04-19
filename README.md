@@ -1,11 +1,15 @@
 # web-function-test
 
-基于Chromium内核的自动化测试工具，用户只需要定义测试流程和数据，完全不需要代码,但是需要xpath玩的很溜
+基于Chromium内核的自动化测试工具，用户只需要定义测试流程和数据，完全不需要代码,但是需要xpath玩的很溜,firefox推荐使用Try XPath插件
 
 ##  申明
 基于[puppeteer](https://github.com/GoogleChrome/puppeteer)开发的web应用程序自动化测试
 
 还在开发过程，目前只能演示一下到底能干啥。演示用的是bootstrap的example
+
+<video id="video" controls="" preload="none" poster="http://om2bks7xs.bkt.clouddn.com/2017-08-26-Markdown-Advance-Video.jpg">
+<source id="mp4" src="http://file.chinacic-next.com/demo.mov" type="video/mp4">
+</video>
 
 ## 前提
 MAC + Node.JS环境，windows没试过也懒得试了
@@ -28,8 +32,6 @@ wft example
 ```
 
 注意：wft example 命令无法重复使用，请删除目录下所有文件后从init命令开始做，也不要在现有测试用例目录下执行example命令
-
-等待param.json文件打开，如果没有自动打开，请手动打开./execution/param.json，并在合适的地方输入你的github账号和密码
 
 Every this is fine, just run your test
 ```
