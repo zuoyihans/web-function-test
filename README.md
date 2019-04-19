@@ -1,11 +1,11 @@
 # web-function-test
 
-基于Chromium内核的自动化测试工具，用户只需要定义测试流程和数据，完全不需要代码
+基于Chromium内核的自动化测试工具，用户只需要定义测试流程和数据，完全不需要代码,但是需要xpath玩的很溜
 
 ##  申明
 基于[puppeteer](https://github.com/GoogleChrome/puppeteer)开发的web应用程序自动化测试
 
-还在开发过程，目前只能演示一下到底能干啥。
+还在开发过程，目前只能演示一下到底能干啥。演示用的是bootstrap的example
 
 ## 前提
 MAC + Node.JS环境，windows没试过也懒得试了
@@ -35,7 +35,7 @@ Every this is fine, just run your test
 ```
 wft run
 ```
-执行完毕后，可以在./output/下找到截图
+执行完毕后，可以在./output/yyyymmddhhmmss下找到截图
 
 ## what happened
 
