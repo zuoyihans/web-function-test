@@ -7,7 +7,7 @@
 
 还在开发过程，目前只能演示一下到底能干啥。演示用的是bootstrap的example
 
-![Demo Screenshot 1](http://file.chinacic-next.com/demo.mov)
+![demo](http://file.chinacic-next.com/demo.mov)
 
 ## 前提
 MAC + Node.JS环境，windows似乎也可以
