@@ -26,11 +26,6 @@
         "selectLocator": "id=\"country\""
       },
       {
-        "description": "点button",
-        "actionType": "click",
-        "objectXpath": "/html/body/div/div[2]/div[2]/form/button"
-      },
-      {
         "description": "验证金额",
         "actionType": "verifyText",
         "actionParam": "P_ExpectAmount",
@@ -38,6 +33,11 @@
         "objectParams": {
           "P_CartName": "P_CartName"
         }
+      },
+      {
+        "description": "点button",
+        "actionType": "click",
+        "objectXpath": "/html/body/div/div[2]/div[2]/form/button"
       }
     ]
   }
