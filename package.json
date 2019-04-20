@@ -1,15 +1,12 @@
 {
   "name": "@cic-digital/web-function-test",
   "preferGlobal": true,
-  "version": "0.0.17",
+  "version": "0.0.20",
   "description": "",
   "directories": {
     "bin": "./bin"
   },
   "bin": {
-    "launchui": "./UI/server.js",
-    "runwebtest": "./runwebtest.js",
-    "updateExecution": "./updateExecution.js",
     "wft": "./wft.js"
   },
   "main": "index.js",
@@ -45,7 +42,8 @@
     "moment": "^2.24.0",
     "open": "^6.1.0",
     "puppeteer": "^1.14.0",
-    "secure-random-string": "^1.1.0"
+    "secure-random-string": "^1.1.0",
+    "string-format": "^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
