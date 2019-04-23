@@ -36,7 +36,15 @@ Every this is fine, just run your test
 ```
 wft run
 ```
-after run command，find your snapshot in ./output/yyyymmddhhmmss
+after run command，find your snapshot in ./output/Chrome_yyyymmddhhmmss
+
+if you want to run in firefox
+```
+wft run -b Firefox
+```
+after run command，find your snapshot in ./output/Firefox_yyyymmddhhmmss
+
+please be noted , firefox is still still in experimental
 
 ## what happened
 

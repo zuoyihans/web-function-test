@@ -11,11 +11,18 @@ async function actionClick(action) {
   const { object } = await getObjectByXpath(action);
   await object.click();
   // 等待请求完毕
-  const finalResponse = await action.page.waitForResponse((response) => {
-    log.debug('request invoked', response.url(), response.status());
-    return true;
-  });
-  log.debug('all request done =>', finalResponse.ok());
+  try {
+    const finalResponse = await action.page.waitForResponse((response) => {
+      log.debug('request invoked', response.url(), response.status());
+      return true;
+    }, {
+      timeout: 5000,
+    });
+    log.debug('all request done =>', finalResponse.ok());
+  } catch (e) {
+    log.debug('wait for http request timeout, try to go ahead');
+  }
+
   // 截屏
   await takeScreenShot(action.page, getScreenShotFileName(action));
   log.debug('actionClick end', action.description);

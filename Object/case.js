@@ -1,5 +1,7 @@
 /* eslint-disable no-await-in-loop */
 const puppeteer = require('puppeteer');
+const pptrFirefox = require('puppeteer-firefox');
+
 const { log } = require('../util/log');
 
 const {
@@ -122,18 +124,23 @@ class TestCase {
     const width = this.config.viewPort.width || 1280;
     const height = this.config.viewPort.height || 768;
     log.debug(`launch puppeteer => headless mode:${this.config.headless} viewport ${width}*${height} delay ${this.config.delay / 1000}s for each step`);
-    this.browser = await puppeteer.launch(
-      {
-        headless: this.config.headless,
-        ignoreHTTPSErrors: true,
-        args: [`--window-size=${width},${height}`],
-        defaultViewport: {
-          width,
-          height,
-        },
-        slowMo: this.config.delay,
+    const launchConfig = {
+      headless: this.config.headless,
+      ignoreHTTPSErrors: true,
+      args: [`--window-size=${width},${height}`],
+      defaultViewport: {
+        width,
+        height,
       },
-    );
+      slowMo: this.config.delay,
+    };
+    if (process.env.wftBrowser === 'Chrome') {
+      log.debug(`launch ${process.env.wftBrowser}`);
+      this.browser = await puppeteer.launch(launchConfig);
+    } else {
+      log.debug(`launch ${process.env.wftBrowser}`);
+      this.browser = await pptrFirefox.launch(launchConfig);
+    }
     this.defaultPage = await this.browser.newPage();
     // const page = {};
     this.components = this.caseinfo.map((component) => {
