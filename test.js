@@ -1,33 +1,44 @@
 const puppeteer = require('puppeteer');
+const pptrFirefox = require('puppeteer-firefox');
+const devices = require('puppeteer/DeviceDescriptors');
+const iPhone = devices['iPhone XR'];
 // const srs = require('secure-random-string');
 
 (async () => {
-  const browser = await puppeteer.launch(
+  const browser = await pptrFirefox.launch(
     {
       headless: false,
-      args: ['--window-size=1280,768'],
+      // args: ['--window-size=1280,768'],
       defaultViewport: {
-        width: 1280,
-        height: 768,
+        width: 1920,
+        height: 1280,
       },
       slowMo: 30,
     },
   );
   const page = await browser.newPage();
-  await page.goto('https://w3.ibm.com/');
-  await page.waitForXPath('/html/body/div[3]/header/div[5]/div/button/strong');
-  const signin = await page.$x('/html/body/div[3]/header/div[5]/div/button/strong');
-  await signin[0].click();
-  await page.waitForXPath('//*[@id="desktop"]');
-  const username = await page.$x('//*[@id="desktop"]');
-  const password = await page.$x('//*[@id="body"]/div[1]/div[2]/div/div/form/input[4]');
-  await username[0].type('wuhd@cn.ibm.com');
-  await password[0].type('12345');
-  await page.waitForXPath('//*[@id="btn_signin"]');
+  await page.goto('http://9.197.78.139:8080');
+  const xpath = '//*[@id="login"]/div[2]/div/p[3]/ons-button';
+  await page.waitForXPath(xpath);
+  await (await page.$x(xpath))[0].click();
+  await page.screenshot({
+    path: 'sample.png',
+    fullPage: true,
+  });
+  // await page.goto('https://w3.ibm.com/');
+  // await page.waitForXPath('/html/body/div[3]/header/div[5]/div/button/strong');
+  // const signin = await page.$x('/html/body/div[3]/header/div[5]/div/button/strong');
+  // await signin[0].click();
+  // await page.waitForXPath('//*[@id="desktop"]');
+  // const username = await page.$x('//*[@id="desktop"]');
+  // const password = await page.$x('//*[@id="body"]/div[1]/div[2]/div/div/form/input[4]');
+  // await username[0].type('wuhd@cn.ibm.com');
+  // await password[0].type('12345');
+  // await page.waitForXPath('//*[@id="btn_signin"]');
 
-  const button = await page.$x('//*[@id="btn_signin"]');
-  console.log(button);
-  await button[0].click();
+  // const button = await page.$x('//*[@id="btn_signin"]');
+  // console.log(button);
+  // await button[0].click();
 })();
 
 // 窗口切换
