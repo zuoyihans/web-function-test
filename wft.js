@@ -55,8 +55,9 @@ async function createExample(configFileName) {
   }
 }
 
-async function runtest(configFileName) {
-  const targetConfigFile = configFileName.config || 'config.json';
+async function runtest(config) {
+  const targetConfigFile = config.config || 'config.json';
+  process.env.wftBrowser = config.browser || 'Chrome';
   await main(targetConfigFile);
 }
 
@@ -117,9 +118,14 @@ program
 program
   .command('run')
   .option('-c, --config [config_file]', 'Specify config file name')
+  .option('-b, --browser [Firefox/Chrome]', 'Specify browser')
   .action((cmd) => {
-    validCommand = true;
-    runtest(cmd);
+    if (cmd.browser && cmd.browser !== 'Firefox' && cmd.browser !== 'Chrome') {
+      log(chalk.redBright(`unsupported browser ${cmd.browser} , please choose Firefox or Chrome`));
+    } else {
+      validCommand = true;
+      runtest(cmd);
+    }
   });
 
 function displayUsage() {
