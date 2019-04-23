@@ -1,59 +1,59 @@
 # web-function-test
 
-基于Chromium内核的自动化测试工具，用户只需要定义测试流程和数据，完全不需要代码,但是需要xpath玩的很溜,firefox推荐使用Try XPath插件
+![Chinese](README_CN.md)
+
+web-automation-testing tool run on Chromium, by using this tool , user only need to define business process and test data, no coding required.but XPATH is required.
 
 ##  申明
-基于[puppeteer](https://github.com/GoogleChrome/puppeteer)开发的web应用程序自动化测试
+it wat developed based on [puppeteer](https://github.com/GoogleChrome/puppeteer)
 
-还在开发过程，目前只能演示一下到底能干啥。演示用的是bootstrap的example
+it's WIP , only very basic function was done, and I will show you what can be done so far. Demo shows how to test bootstrap example page.
 
 [demo](http://file.chinacic-next.com/demo.mov)
 
 ## 前提
-MAC + Node.JS环境，windows似乎也可以
+Node.JS enviroment is required
 
 ## quick start
 
-安装
+install
 ```
 npm install -g @cic-digital/web-function-test
 ```
 
-打开命令行工具，找到一个空目录，先初始化测试工具
+open terminal , go to an empty folder , init it
 ```
 wft init
 ```
 
-生成example必要的文件
+init example
 ```
 wft example
 ```
-
-注意：wft example 命令无法重复使用，请删除目录下所有文件后从init命令开始做，也不要在现有测试用例目录下执行example命令
+wft example command can not be used twice please empty your folder before you use it again.
 
 Every this is fine, just run your test
 ```
 wft run
 ```
-执行完毕后，可以在./output/yyyymmddhhmmss下找到截图
+after run command，find your snapshot in ./output/yyyymmddhhmmss
 
 ## what happened
 
-请参考component目录和execution目录下的文件，你只需要定制你的业务逻辑，就可以轻松的自动化测试啦
+business process was break down to component defined in "component" folder, after component defined , you can defined your test case, sample can be found in ./execution/case*.json, test data can be found in ./execution/param.json.
 
 ##  Basic Concept
 ![avatar](basicconcept.png)
 
 ## how to use it(WIP)
-此功能还在开发中
+we will provide web user interface for edit all json file later.
 ```
 wft ui
 ```
 
-默认使用3000端口，如果端口占用
+by default , web ui use port 3000, if it is used by other application
 ```
 PORT={PORT} wft ui
 ```
-{PORT}换成你希望的端口
+change the {PORT} to the port number you want
 
-在用户界面编辑业务逻辑component和测试用例case
