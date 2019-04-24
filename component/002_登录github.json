@@ -1,0 +1,22 @@
+{
+  "description": "使用指定账号登录github",
+  "actions": [
+    {
+      "description": "输入用户名",
+      "actionType": "input",
+      "objectXpath": "//*[@id=\"login_field\"]",
+      "actionParam": "P_UserName"
+    },
+    {
+      "description": "输入密码",
+      "actionType": "input",
+      "objectXpath": "//*[@id=\"password\"]",
+      "actionParam": "P_Password"
+    },
+    {
+      "description": "点击登录按钮",
+      "actionType": "click",
+      "objectXpath": "//*[@id=\"login\"]/form/div[3]/input[4]"
+    }
+  ]
+}
