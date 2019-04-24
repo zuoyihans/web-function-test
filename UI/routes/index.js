@@ -48,8 +48,8 @@ router.get('/paramfile', (req, res) => {
 });
 
 router.get('/component/:filename', (req, res) => {
-  const { executionFolder } = process.env;
-  const caseinfo = readJsonFile(`${executionFolder}/${req.params.filename}`);
+  const { componentFolder } = process.env;
+  const caseinfo = readJsonFile(`${componentFolder}/${req.params.filename}`);
   res.json(caseinfo);
 });
 
