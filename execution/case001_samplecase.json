@@ -1,0 +1,22 @@
+[
+  {
+    "component": "001_打开github",
+    "index": 1,
+    "ukey": "55t06xXJ"
+  },
+  {
+    "component": "002_登录github",
+    "index": 2,
+    "ukey": "S3hQm2cq"
+  },
+  {
+    "component": "003_设置status",
+    "index": 3,
+    "ukey": "QJs8sQ7G"
+  },
+  {
+    "component": "004_清除status",
+    "index": 4,
+    "ukey": "wuZrLyb1"
+  }
+]
