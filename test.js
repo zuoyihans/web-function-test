@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+
 const puppeteer = require('puppeteer');
 const pptrFirefox = require('puppeteer-firefox');
 const devices = require('puppeteer/DeviceDescriptors');
@@ -5,7 +7,7 @@ const iPhone = devices['iPhone XR'];
 // const srs = require('secure-random-string');
 
 (async () => {
-  const browser = await pptrFirefox.launch(
+  const browser = await puppeteer.launch(
     {
       headless: false,
       // args: ['--window-size=1280,768'],
@@ -17,14 +19,26 @@ const iPhone = devices['iPhone XR'];
     },
   );
   const page = await browser.newPage();
-  await page.goto('http://9.197.78.139:8080');
-  const xpath = '//*[@id="login"]/div[2]/div/p[3]/ons-button';
+  await page.goto('http://rrys2019.com/');
+  const xpath = '/html/body/div[5]/dl[1]/dt/h2';
   await page.waitForXPath(xpath);
-  await (await page.$x(xpath))[0].click();
-  await page.screenshot({
-    path: 'sample.png',
-    fullPage: true,
-  });
+  const title = await page.$x(xpath);
+  console.log(title.length);
+  const text = await page.evaluate(targetObject => targetObject.textContent, title[0]);
+  console.log('目前最新', text);
+  const titlexpath = '/html/body/div[5]/dl[1]/dd/p';
+  await page.waitForXPath(titlexpath);
+  const downloadtitles = await page.$x('/html/body/div[5]/dl[1]/dd/p');
+  const downloadlinks = await page.$x('/html/body/div[5]/dl[1]/dd/div/a');
+  for (let i = 0; i < downloadtitles.length; i += 1) {
+    const downloadtitle = await page.evaluate(targetObject => targetObject.textContent, downloadtitles[i]);
+    console.log(downloadtitle);
+    const downloadlink = await page.evaluate(targetObject => targetObject.href, downloadlinks[i]);
+    console.log(downloadlink);
+
+  }
+
+  
   // await page.goto('https://w3.ibm.com/');
   // await page.waitForXPath('/html/body/div[3]/header/div[5]/div/button/strong');
   // const signin = await page.$x('/html/body/div[3]/header/div[5]/div/button/strong');
