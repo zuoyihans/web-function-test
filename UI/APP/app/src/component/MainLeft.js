@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { refreshCurrentComponentFileAsync } from '../redux/actionCreator';
 
 const mapStateToProps = state => { 
   const { componentFiles, idList } = state.ComponentFile;
@@ -15,7 +16,7 @@ class MainLeft extends React.Component {
   }
   selectComponentFile = (selectIndex, link) => {
     this.setState({ selectIndex: selectIndex });
-    // this.props.getCurrentComponentFileAsync(link);
+    this.props.refreshCurrentComponentFileAsync(link);
   }
 
   render(){
@@ -41,4 +42,4 @@ class MainLeft extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(MainLeft);
+export default connect(mapStateToProps, { refreshCurrentComponentFileAsync })(MainLeft);

@@ -41,3 +41,14 @@ export const refreshComponentFileListAsync = (link) => {
     )
   }
 }
+
+export const refreshCurrentComponentFileAsync = (link) => {
+  return dispatch => {
+    return fetch(link)
+    .then(response => response.json())
+    .then(
+      sauce => dispatch(refreshCurrentComponentFile(sauce)),
+      err => {console.log(err)}
+    )
+  }
+}
