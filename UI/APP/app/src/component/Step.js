@@ -123,6 +123,7 @@ class Step extends React.Component {
         <b>STEP{this.state.index + 1}</b>
         <InputUpdateProps name={'description'} value={this.state.step.description} updateProps={this.createUpdator('description')}></InputUpdateProps>
         <StepActionType type={this.state.step.actionType} updateProps={this.createUpdator('actionType')}/>
+        
         {this.elementByActionType(this.state.step)}
       </div>
     )
