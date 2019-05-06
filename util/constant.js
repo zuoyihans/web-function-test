@@ -6,3 +6,4 @@ module.exports.verifyText = 'verifyText';
 module.exports.fileUpload = 'fileUpload';
 module.exports.select = 'select';
 module.exports.hover = 'hover';
+module.exports.conditionCheck = 'conditionCheck';

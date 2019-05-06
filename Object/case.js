@@ -17,6 +17,7 @@ const {
   fileUpload,
   select,
   hover,
+  conditionCheck,
 } = require('../util/constant');
 const { actionOpenUrl } = require('../actions/openUrl');
 const { actionInput } = require('../actions/input');
@@ -26,6 +27,7 @@ const { actionVerifyText } = require('../actions/verifyText');
 const { actionFileUpload } = require('../actions/fileUpload');
 const { actionSelect } = require('../actions/select');
 const { actionHover } = require('../actions/hover');
+const { actionConditionCheck } = require('../actions/conditionCheck');
 
 class TestCase {
   constructor(casefile, config) {
@@ -99,6 +101,9 @@ class TestCase {
       case hover:
         actionResult = await actionHover(paramAction);
         break;
+      case conditionCheck:
+        actionResult = await actionConditionCheck(paramAction);
+        break;
       default:
         throw new Error(`unknow action ${paramAction.actionType}`);
     }
@@ -151,16 +156,21 @@ class TestCase {
     this.components = this.caseinfo.map((component) => {
       const componentdetail = readJsonFile(`${this.config.componentFolder}/${component.component}.json`);
       componentdetail.ukey = component.ukey;
+      componentdetail.maySkip = component.maySkip || false;
       return componentdetail;
     });
     log.debug(`${this.components.length} components found`);
     this.componentresult = [];
     for (let componentidx = 0; componentidx < this.components.length; componentidx += 1) {
       this.currentComponentIdx = componentidx + 1;
-      log.debug(`Component No${this.currentComponentIdx}:  ${this.components[componentidx].description} start`);
-      const singleresult = await this.executeComponent(this.components[componentidx]);
-      this.componentresult.push(singleresult);
-      log.debug(`Component No${this.currentComponentIdx} ${this.components[componentidx].description} end`);
+      if (global.WFTSkipFlag && this.components[componentidx].maySkip === global.WFTSkipFlag) {
+        log.debug(`Component No${this.currentComponentIdx} ${this.components[componentidx].description} skipped`);
+      } else {
+        log.debug(`Component No${this.currentComponentIdx}:  ${this.components[componentidx].description} start`);
+        const singleresult = await this.executeComponent(this.components[componentidx]);
+        this.componentresult.push(singleresult);
+        log.debug(`Component No${this.currentComponentIdx} ${this.components[componentidx].description} end`);
+      }
     }
     await this.browser.close();
     log.debug('execute end');
