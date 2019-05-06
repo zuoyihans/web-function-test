@@ -16,6 +16,7 @@ const {
   verifyText,
   fileUpload,
   select,
+  hover,
 } = require('../util/constant');
 const { actionOpenUrl } = require('../actions/openUrl');
 const { actionInput } = require('../actions/input');
@@ -24,6 +25,7 @@ const { actionCheckbox } = require('../actions/checkbox');
 const { actionVerifyText } = require('../actions/verifyText');
 const { actionFileUpload } = require('../actions/fileUpload');
 const { actionSelect } = require('../actions/select');
+const { actionHover } = require('../actions/hover');
 
 class TestCase {
   constructor(casefile, config) {
@@ -93,6 +95,9 @@ class TestCase {
         break;
       case select:
         actionResult = await actionSelect(paramAction);
+        break;
+      case hover:
+        actionResult = await actionHover(paramAction);
         break;
       default:
         throw new Error(`unknow action ${paramAction.actionType}`);
