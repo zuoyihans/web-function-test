@@ -43,23 +43,26 @@ class MainMiddle extends React.Component {
 
   render(){
     return (
-      <div className="col-sm-6 mx-auto border">
+      <div className="col-sm-6 auto-mx border">
         component detail
-        <h5> {this.state.description}</h5>
+        {/* <h5> {this.state.description}</h5> */}
         <InputUpdateProps name="description" value={this.state.description} updateProps={this.updateDescription}></InputUpdateProps>
         {
           this.state.actions.map(
             (step, index) => {
               return (
-                <div key={index}>
-                  <h6>{step.description} -> {index}</h6>
-                  <Step step={step} index={index} updateProps={this.updateStep}/>
+                <div >
+                  <div key={index} >
+                    {/* <h6>{step.description} -> {index}</h6>
+                    <h6>{step.actionParam}</h6> */}
+                    <Step step={step} index={index} updateProps={this.updateStep}/>
+                  </div>
+                  <br/>
                 </div>
               )
             }
           )
         }
-        
       </div>
     )
   }
