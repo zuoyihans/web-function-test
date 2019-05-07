@@ -19,7 +19,7 @@ class StepActionType extends React.Component {
 
   render() {
     return (
-      <div className="dropdown">
+      <div className="dropdown col">
         <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         ActionType: {this.state.type}
         </button>

@@ -47,7 +47,10 @@ export const refreshCurrentComponentFileAsync = (link) => {
     return fetch(link)
     .then(response => response.json())
     .then(
-      sauce => dispatch(refreshCurrentComponentFile(sauce)),
+      sauce => {
+        sauce.link = link;
+        dispatch(refreshCurrentComponentFile(sauce));
+      },
       err => {console.log(err)}
     )
   }
