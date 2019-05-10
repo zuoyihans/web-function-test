@@ -23,10 +23,12 @@ const mapStateToProps = state => {
 class MainMiddle extends React.Component {
   constructor(props){
     super(props);
+   
     this.state ={
-      link: this.props.cunrrentComponentFile.link,
-      description: this.props.cunrrentComponentFile.description,
-      actions: [...this.props.cunrrentComponentFile.actions],
+      ...this.props.cunrrentComponentFile,
+      // link: this.props.cunrrentComponentFile.link,
+      // description: this.props.cunrrentComponentFile.description,
+      // actions: [...this.props.cunrrentComponentFile.actions],
     };
     this.updateDescription = this.updateDescription.bind(this);
     this.updateStep = this.updateStep.bind(this);
@@ -74,7 +76,7 @@ class MainMiddle extends React.Component {
       description,
       actionType,
     }
-    if (Object.prototype.hasOwnProperty.call(step, "frame" && step.frame.trim() !== "")) {
+    if (Object.prototype.hasOwnProperty.call(step, "frame") && step.frame.trim() !== "") {
       tmpStep.frame = step.frame;
     }
     switch(actionType) {
@@ -144,29 +146,72 @@ class MainMiddle extends React.Component {
     .then(response => console.log(response))
   }
 
+  
+
   render(){
-    return (
-      <div className="col-sm-6 auto-mx border">
-        component detail
-        <h5> {this.state.link}</h5>
-        <InputUpdateProps name="description" value={this.state.description} updateProps={this.updateDescription}></InputUpdateProps>
-        {
-          this.state.actions.map(
-            (step, index) => {
-              return (
-                <div key={index}>
-                  <Step step={step} index={index} updateProps={this.updateStep} createPropsStep={this.createStep}/>
-                  <br/>
-                </div>
-              );
+    const tmpCunrrentComponentFile = this.props.cunrrentComponentFile;
+    let result;
+    console.log(tmpCunrrentComponentFile)
+    if (Object.prototype.hasOwnProperty.call(tmpCunrrentComponentFile, 'description')) {
+      if (this.state.actions.length !== 0) {
+        result = (
+          <div className="col-sm-6 auto-mx border">
+            Component Detail
+            {/* <h5> {this.state.link}</h5> */}
+            <InputUpdateProps name="description" value={this.state.description} updateProps={this.updateDescription}></InputUpdateProps>
+            { 
+              this.state.actions.map(
+                (step, index) => {
+                  return (
+                    <div key={index}>
+                      <Step step={step} index={index} updateProps={this.updateStep} createPropsStep={this.createStep}/>
+                      <br/>
+                    </div>
+                  );
+                }
+              )
             }
-          )
-        }
-        <button type="button" className="btn btn-primary btn-sm col-2" onClick={this.saveComponentFile}>
-            <span className="fas fa-save"> Update</span>
-          </button>
-      </div>
-    )
+            <div className="row justify-content-around">
+              <button type="button" className="btn btn-primary btn-sm col-2" onClick={this.saveComponentFile}>
+                <span className="fas fa-save"> Save</span>
+              </button>
+            </div>
+          </div>
+        )
+      } else {
+        const step = {
+          description: "please input description",
+          actionType: "please select description",
+        };
+        const index = 0;
+        result = (
+          <div className="col-sm-6 auto-mx border">
+            Component Detail
+            <InputUpdateProps name="description" value={this.state.description} updateProps={this.updateDescription}></InputUpdateProps>
+            <div>
+              <Step step={step} index={index} updateProps={this.updateStep} createPropsStep={this.createStep}/>
+              <br/>
+            </div>
+            <div className="row justify-content-around">
+              <button type="button" className="btn btn-primary btn-sm col-2" onClick={this.saveComponentFile}>
+                <span className="fas fa-save"> Save</span>
+              </button>
+            </div>
+          </div>
+        )
+      }
+    } else {
+      result = (
+        <div className="col-sm-6 auto-mx border">
+          {/* <div className="row">
+            <button type="button" className="btn btn-primary btn-sm col-3" onClick={this.createComponentFile}>
+              <span className="fas fa-plus"> New Component</span>
+            </button>
+          </div> */}
+        </div>
+      )
+    }
+    return result;
   }
 }
 

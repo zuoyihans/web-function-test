@@ -1,14 +1,15 @@
 import {
   REFRESH_COMPONENT_FILES,
   REFRESH_CURRENT_COMPONENT_FILE,
+  CREATE_COMPONENT_FILE,
 } from '../actionTypes';
 
 const initialState = {
   componentFiles: {},
   idList: [],
   cunrrentComponentFile: {
-    actions: [],
-    description: "",
+    // actions: [],
+    // description: "",
   },
 };
 
@@ -32,6 +33,12 @@ export default function(state=initialState, action) {
         }
       }
     }
+    // case CREATE_COMPONENT_FILE: {
+    //   return {
+    //     ...state,
+    //     componentFiles: { ...state.componentFiles, action.componentFile}
+    //   }
+    // }
     default: {
       return state;
     }
