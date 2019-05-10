@@ -79,4 +79,15 @@ router.post('/jsonfile', (req, res) => {
   });
 });
 
+router.post('/renamejsonfile', (req, res) => {
+  const { oldfilepath, newfilepath } = req.body;
+  fs.rename(oldfilepath, newfilepath, (err) => {
+    if (err) {
+      log.error(err);
+      res.status(500).send(err);
+    }
+    res.send(`renamed from ${oldfilepath}to ${newfilepath}`);
+  });
+});
+
 module.exports = router;
