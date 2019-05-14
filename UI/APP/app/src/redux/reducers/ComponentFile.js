@@ -1,7 +1,6 @@
 import {
   REFRESH_COMPONENT_FILES,
   REFRESH_CURRENT_COMPONENT_FILE,
-  CREATE_COMPONENT_FILE,
 } from '../actionTypes';
 
 const initialState = {

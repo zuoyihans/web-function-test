@@ -151,7 +151,6 @@ class MainMiddle extends React.Component {
   render(){
     const tmpCunrrentComponentFile = this.props.cunrrentComponentFile;
     let result;
-    console.log(tmpCunrrentComponentFile)
     if (Object.prototype.hasOwnProperty.call(tmpCunrrentComponentFile, 'description')) {
       if (this.state.actions.length !== 0) {
         result = (
