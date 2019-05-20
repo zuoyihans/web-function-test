@@ -18,6 +18,9 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(express.static(`${__dirname}/public`));
 
+const buildPath = path.join(__dirname, 'APP', 'app', 'build');
+app.use(express.static(buildPath));
+
 
 app.use(cors());
 // ADD USE START

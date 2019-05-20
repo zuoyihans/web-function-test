@@ -4,23 +4,37 @@
 const express = require('express');
 const fs = require('fs');
 const jsonfile = require('jsonfile');
+const path = require('path');
 
 const { getCasefilelist, readJsonFile } = require('../../util/util');
 const { log } = require('../../util/log');
 
 const router = express.Router();
+const buildPath = path.join(__dirname, 'APP', 'app', 'build');
 
 router.get('/', (req, res) => {
-  res.render('main');
+  // res.render('main');
+  res.sendFile(path.join(__dirname, buildPath, 'index.html'));
 });
 
 
 router.get('/components', (req, res) => {
   const { componentFolder } = process.env;
-  const componentfiles = fs.readdirSync(componentFolder);
+  const queryfiles = fs.readdirSync(componentFolder);
+  const queryFolder = componentFolder;
   res.json({
-    componentFolder,
-    componentfiles,
+    queryFolder,
+    queryfiles,
+  });
+});
+
+router.get('/executions', (req, res) => {
+  const { executionFolder } = process.env;
+  const queryfiles = fs.readdirSync(executionFolder);
+  const queryFolder = executionFolder;
+  res.json({
+    queryFolder,
+    queryfiles,
   });
 });
 
@@ -76,6 +90,16 @@ router.post('/jsonfile', (req, res) => {
     res.json({
       result: 'done',
     });
+  });
+});
+router.delete('/jsonfile', (req, res) => {
+  const { filepath } = req.body;
+  fs.unlink(filepath, (err) => {
+    if (err) {
+      log.error(err);
+      res.status(500).send(err);
+    }
+    res.send(`deleted file: ${filepath}`);
   });
 });
 

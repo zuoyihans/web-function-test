@@ -1,0 +1,43 @@
+{
+  "description": "基本操作demo",
+  "actions": [
+    {
+      "description": "验证title",
+      "actionType": "verifyText",
+      "objectXpath": "/html/body/div/div[1]/h2",
+      "actionParam": "Checkout form"
+    },
+    {
+      "description": "输入名",
+      "actionType": "input",
+      "objectXpath": "//*[@id=\"firstName\"]",
+      "actionParam": "P_FirstName"
+    },
+    {
+      "description": "勾选checkbox",
+      "actionType": "checkbox",
+      "objectXpath": "//*[@id=\"save-info\"]",
+      "actionParam": "P_ExpectStatus"
+    },
+    {
+      "description": "选下拉框",
+      "actionType": "select",
+      "actionParam": "P_ValueForSelect",
+      "selectLocator": "id=\"country\""
+    },
+    {
+      "description": "验证金额",
+      "actionType": "verifyText",
+      "actionParam": "P_ExpectAmount",
+      "objectXpath": "/html/body/div/div[2]/div[1]/ul/li/div/h6[contains(.,'{P_CartName}')]/ancestor::li/span",
+      "objectParams": {
+        "P_CartName": "P_CartName"
+      }
+    },
+    {
+      "description": "点button",
+      "actionType": "click",
+      "objectXpath": "/html/body/div/div[2]/div[2]/form/button"
+    }
+  ]
+}

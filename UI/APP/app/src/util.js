@@ -15,3 +15,47 @@ export const httpRequest = (data, url, method, cb)=> {
   .then(response => console.log(response))
   .then(() => cb())
 };
+
+// @parm link 获取文件名的url
+// @return  文件名字的list。
+export const queryFileList = (link) => {
+  return fetch(link)
+    .then(response => response.json())
+    .then(
+      sauce => {
+        const { queryFolder, queryfiles } = sauce;
+        return queryfiles.map((x) => ({fileName: x, folder: queryFolder}));
+      },
+      err => {console.log(err)}
+    )
+};
+
+export const queryFileDetail = (link) => {
+  return fetch(link)
+    .then(
+      response => response.json(),
+      err => {console.log(err)}
+    )
+};
+
+export const queryFileListBackup = (link, cb) => {
+  return dispatch => {
+    return fetch(link)
+    .then(response => response.json())
+    .then(
+      sauce => {
+        const { componentFolder, componentfiles } = sauce;
+        const componentFilesList = [];
+        for (let i=0; i<componentfiles.length; i++) {
+          componentFilesList.push({
+            fileName: componentfiles[i],
+            folder: componentFolder,
+          });
+        };
+        dispatch(cb(componentFilesList))
+      },
+      // sauce => console.log(sauce),
+      err => {console.log(err)}
+    )
+  }
+};

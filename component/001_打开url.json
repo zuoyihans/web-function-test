@@ -1,0 +1,10 @@
+{
+  "description": "打开URL",
+  "actions": [
+    {
+      "description": "打开url",
+      "actionType": "openUrl",
+      "actionParam": "P_Url"
+    }
+  ]
+}
