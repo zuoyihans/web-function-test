@@ -11,10 +11,11 @@ class StepActionType extends React.Component {
   }
 
   updateValue(value) {
+    console.log('stepactiontype: ', this.props)
     this.setState({
       type: value,
     })
-    this.state.updateProps(value);
+    this.props.updateProps(value);
   }
 
   render() {

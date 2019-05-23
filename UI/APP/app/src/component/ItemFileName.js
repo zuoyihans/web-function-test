@@ -37,13 +37,14 @@ class ItemFileName extends React.Component {
     const url = "http://localhost:3001/renamejsonfile";
     const httpMethod = "POST";
     httpRequest(postData, url, httpMethod, cb)
-    
   }
   
   async selectedComponentFile(element) {
     this.props.selectKey(element[0]);
-    const url = `http://localhost:3001/component/${element[1].fileName}`;
-    const currentFileDetail = await queryFileDetail(url)
+    const url = `http://localhost:3001/${element[1].folder}/${element[1].fileName}`;
+    const currentFileDetail = await queryFileDetail(url);
+    currentFileDetail.fileName = element[1].fileName;
+    currentFileDetail.folder = element[1].folder;
     this.props.updateCurrentFileDetail(currentFileDetail);
   }
 
@@ -54,19 +55,21 @@ class ItemFileName extends React.Component {
   };
 
   deleteComponentFile() {
-    let cb = () => {
-      this.props.deleteOBJLeftFile([this.props.element[0]])
-      this.props.currentKey === this.props.element[0] && this.props.recoverCurrentFileDetail()
-    }
-    cb.bind(this);
-    const deleteObj = this.props.element[1];
-    const url = "http://localhost:3001/jsonfile";
-    const deleteData = {
-      filepath: `${deleteObj.folder}/${deleteObj.fileName}`,
-    }
-    const httpMethod = "DELETE";
-    httpRequest(deleteData, url, httpMethod, cb);
-
+    const confirm = window.confirm('Do you want to delete this file');
+    if (confirm) {
+      let cb = () => {
+        this.props.deleteOBJLeftFile([this.props.element[0]])
+        this.props.currentKey === this.props.element[0] && this.props.recoverCurrentFileDetail()
+      }
+      cb.bind(this);
+      const deleteObj = this.props.element[1];
+      const url = "http://localhost:3001/jsonfile";
+      const deleteData = {
+        filepath: `${deleteObj.folder}/${deleteObj.fileName}`,
+      }
+      const httpMethod = "DELETE";
+      httpRequest(deleteData, url, httpMethod, cb);
+    } 
   }
 
   render() {

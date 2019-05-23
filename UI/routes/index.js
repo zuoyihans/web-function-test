@@ -5,6 +5,7 @@ const express = require('express');
 const fs = require('fs');
 const jsonfile = require('jsonfile');
 const path = require('path');
+const srs = require('secure-random-string');
 
 const { getCasefilelist, readJsonFile } = require('../../util/util');
 const { log } = require('../../util/log');
@@ -53,7 +54,7 @@ router.get('/paramfile', (req, res) => {
   const paramexists = fs.existsSync(`${executionFolder}/param.json`);
   if (paramexists) {
     res.json({
-      paramfile: `${executionFolder}/param.json`,
+      paramfile: readJsonFile(`${executionFolder}/param.json`),
     });
   } else {
     res.json({
@@ -64,6 +65,12 @@ router.get('/paramfile', (req, res) => {
 router.get('/component/:filename', (req, res) => {
   const { componentFolder } = process.env;
   const caseinfo = readJsonFile(`${componentFolder}/${req.params.filename}`);
+  res.json(caseinfo);
+});
+
+router.get('/execution/:filename', (req, res) => {
+  const { executionFolder } = process.env;
+  const caseinfo = readJsonFile(`${executionFolder}/${req.params.filename}`);
   res.json(caseinfo);
 });
 
@@ -112,6 +119,14 @@ router.post('/renamejsonfile', (req, res) => {
     }
     res.send(`renamed from ${oldfilepath}to ${newfilepath}`);
   });
+});
+
+router.get('/ukey8length', (req, res) => {
+  const uKey = srs({
+    length: 8,
+    alphanumeric: true,
+  });
+  res.json({ uKey });
 });
 
 module.exports = router;

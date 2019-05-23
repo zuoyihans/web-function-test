@@ -8,6 +8,9 @@ import {
   CHANGE_MODULE_TYPE,
   UPDATE_CURRENT_FILE_DETAIL,
   RECOVER_CURRENT_FILE_DETAIL,
+  ADD_COMPONENT_IN_CURRENT_FILE,
+  DELETE_COMPONENT_IN_CURRENT_FILE,
+  UPDATE_COMPONENT_IN_CURRENT_FILE,
 } from '../actionTypes';
 
 import _ from 'lodash';
@@ -82,6 +85,30 @@ export default function(state=initialState, action) {
       return {
         ...state,
         currentModel: action.currentModel,
+      }
+    }
+    case ADD_COMPONENT_IN_CURRENT_FILE: {
+      return {
+        ...state,
+        cunrrentFileDetail: {
+          ...state.cunrrentFileDetail,
+          ...action.newComponent,
+        }
+      }
+    }
+    case UPDATE_COMPONENT_IN_CURRENT_FILE: {
+      return {
+        ...state,
+        cunrrentFileDetail: {
+          ...state.cunrrentFileDetail,
+          ...action.newComponent,
+        }
+      }
+    }
+    case DELETE_COMPONENT_IN_CURRENT_FILE: {
+      return {
+        ...state,
+        cunrrentFileDetail: _.omit(state.cunrrentFileDetail, action.delKey),
       }
     }
     // case CREATE_COMPONENT_FILE: {

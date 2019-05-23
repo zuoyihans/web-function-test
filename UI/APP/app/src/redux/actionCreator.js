@@ -8,6 +8,9 @@ import {
   CHANGE_MODULE_TYPE,
   UPDATE_CURRENT_FILE_DETAIL,
   RECOVER_CURRENT_FILE_DETAIL,
+  ADD_COMPONENT_IN_CURRENT_FILE,
+  DELETE_COMPONENT_IN_CURRENT_FILE,
+  UPDATE_COMPONENT_IN_CURRENT_FILE,
 } from './actionTypes';
 
 export const initOBJLeftFiles = (componentFilesList) => ({
@@ -54,6 +57,19 @@ export const recoverCurrentFileDetail = () => ({
   type: RECOVER_CURRENT_FILE_DETAIL,
   cunrrentFileDetail: {},
 });
+
+export const addComponentInCurrentFile = (key,newComponent) => ({
+  type:ADD_COMPONENT_IN_CURRENT_FILE,
+  newComponent:{[key]:newComponent},
+})
+export const updateComponentInCurrentFile = (key,newComponent) => ({
+  type:UPDATE_COMPONENT_IN_CURRENT_FILE,
+  newComponent:{[key]:newComponent},
+})
+export const deleteComponentInCurrentFile = (key) => ({
+  type:DELETE_COMPONENT_IN_CURRENT_FILE,
+  delKey:[...key],
+})
 
 // export const refreshCurrentComponentFileAsync = (link) => {
 //   return dispatch => {

@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import MainLeft from './MainLeft';
 import MainMiddleComponent from './MainMiddleComponent';
-import MainRight from './MainRight';
+import { changeModule, initOBJLeftFiles } from '../redux/actionCreator';
+
+import { queryFileList } from '../util';
+
+// import MainRight from './MainRight';
 
 const mapStateToProps = state => { 
   const { objLeftFiles, currentIndex } = state.ComponentFile;
@@ -10,7 +14,17 @@ const mapStateToProps = state => {
 };
 
 class ComponentMain extends React.Component {
-  
+  constructor(props) {
+    super(props);
+    this.initLeftFilesList();
+    this.props.changeModule('component');
+  }
+
+  async initLeftFilesList() {
+    const filesList = await queryFileList("http://localhost:3001/components");
+    this.props.initOBJLeftFiles(filesList);
+  }
+
   render() {
     return (
       <main role="main">
@@ -18,7 +32,8 @@ class ComponentMain extends React.Component {
           <div className="row flex-xl-nowrap">
             <MainLeft />
             <MainMiddleComponent />
-            <MainRight />
+            <div className="col-sm-3 mx-auto border">
+            </div>
           </div>
         </div>
       </main>
@@ -26,4 +41,4 @@ class ComponentMain extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(ComponentMain);
+export default connect(mapStateToProps, { changeModule, initOBJLeftFiles })(ComponentMain);

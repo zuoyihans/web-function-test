@@ -6,7 +6,6 @@ class CheckBoxUpdateProps extends React.Component {
     super(props);
     this.state = {
       value: this.props.value, 
-      // name: this.props.name,
       updateProps: this.props.updateProps,
     }
     this.updateValue = this.updateValue.bind(this);

@@ -30,6 +30,19 @@ export const queryFileList = (link) => {
     )
 };
 
+// @parm url
+// @return  json。
+export const queryReturnJson = (link) => {
+  return fetch(link)
+    .then(
+      response => response.json()
+    )
+    .then(
+      sauce => {return sauce},
+      err => {console.log(err)}
+    )
+};
+
 export const queryFileDetail = (link) => {
   return fetch(link)
     .then(

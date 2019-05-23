@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeModule, initOBJLeftFiles, initOBJRightFiles } from './redux/actionCreator';
+// import { changeModule, initOBJLeftFiles, initOBJRightFiles } from './redux/actionCreator';
 
 import ComponentMain from './component/ComponentMain';
 import ExecutionMain from './component/ExecutionMain';
 
-import { queryFileList } from './util';
+// import { queryFileList } from './util';
 
 
 const mapStateToProps = state => { 
@@ -15,24 +15,24 @@ const mapStateToProps = state => {
 };
 
 class AppRouter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleModuleType = this.handleModuleType.bind(this);
-    this.handleModuleType('component');
-  }
+  // constructor(props) {
+  //   super(props);
+  //   // this.handleModuleType = this.handleModuleType.bind(this);
+  //   // this.handleModuleType('component');
+  // }
 
-  async handleModuleType(value) {
-    this.props.changeModule(value);
-    if (value === 'component') {
-      const filesList = await queryFileList("http://localhost:3001/components");
-      this.props.initOBJLeftFiles(filesList);
-    } else {
-      const filesListLeft = await queryFileList("http://localhost:3001/executions");
-      this.props.initOBJLeftFiles(filesListLeft);
-      const filesListRight = await queryFileList("http://localhost:3001/components");
-      this.props.initOBJRightFiles(filesListRight);
-    }
-  }
+  // handleModuleType(value) {
+  //   this.props.changeModule(value);
+    // if (value === 'component') {
+    //   const filesList = await queryFileList("http://localhost:3001/components");
+    //   this.props.initOBJLeftFiles(filesList);
+    // } else {
+    //   const filesListLeft = await queryFileList("http://localhost:3001/executions");
+    //   this.props.initOBJLeftFiles(filesListLeft);
+    //   const filesListRight = await queryFileList("http://localhost:3001/components");
+    //   this.props.initOBJRightFiles(filesListRight);
+    // }
+  // }
 
   render() {
     return (
@@ -40,10 +40,11 @@ class AppRouter extends React.Component {
         <nav className="navbar navbar-expand-lg navbar-light bg-info rounded">
           <div className="collapse navbar-collapse" id="navbarText">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item" onClick={()=>{this.handleModuleType('component')}}>
+              {/* <li className="nav-item" onClick={()=>{this.handleModuleType('component')}}> */}
+              <li className="nav-item" >
                 <Link to="/" className={(this.props.currentModel === 'component')?"nav-link active":"nav-link"}>Home</Link>
               </li>
-              <li className="nav-item" onClick={()=>{this.handleModuleType('execution')}}>
+              <li className="nav-item" >
                 <Link to="/execution" className={(this.props.currentModel === 'execution')?"nav-link active":"nav-link"}>Execution</Link>
               </li>
             </ul>
@@ -56,4 +57,4 @@ class AppRouter extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, { changeModule, initOBJLeftFiles, initOBJRightFiles })(AppRouter);
+export default connect(mapStateToProps)(AppRouter);

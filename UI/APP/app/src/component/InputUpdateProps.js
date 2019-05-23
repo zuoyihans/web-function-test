@@ -5,8 +5,6 @@ class InputUpdateProps extends React.Component {
     super(props);
     this.state = {
       value: this.props.value, 
-      name: this.props.name,
-      updateProps: this.props.updateProps,
     }
   }
 
@@ -14,12 +12,12 @@ class InputUpdateProps extends React.Component {
     this.setState({
       value,
     })
-    this.state.updateProps(value);
+    this.props.updateProps(value);
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      ...nextProps,
+      value: nextProps.value,
     })
   }
 
@@ -27,7 +25,7 @@ class InputUpdateProps extends React.Component {
     return (
       <div className="input-group input-group-sm mb-3">
         <div className="input-group-prepend">
-          <span className="input-group-text" >{this.state.name}:</span>
+          <span className="input-group-text" >{this.props.name}:</span>
         </div>
         <input
           type="text" className="form-control" 

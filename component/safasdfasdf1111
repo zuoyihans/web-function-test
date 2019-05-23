@@ -1,0 +1,17 @@
+{
+  "description": "NEW COMPONENT2222",
+  "actions": [
+    {
+      "description": "NEW ACTIONSTEP2222",
+      "actionType": "fileupload",
+      "objectXpath": "NEW objectXpath14",
+      "actionParam": "NEW actionParam23"
+    },
+    {
+      "description": "NEW ACTIONSTEP2222",
+      "actionType": "openUrl",
+      "frame": "new frame111",
+      "actionParam": "NEW actionParam3333"
+    }
+  ]
+}

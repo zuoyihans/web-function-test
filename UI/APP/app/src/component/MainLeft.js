@@ -34,7 +34,7 @@ class MainLeft extends React.Component {
     this.setState({
       showInputFileName:false
     })
-    const objFile = {
+    let objFile = {
       fileName : value,
       folder: this.props.currentModel === 'component'?'./component':'./execution'
     }
@@ -48,9 +48,17 @@ class MainLeft extends React.Component {
     }
     cb = cb.bind(this);
     const url = "http://localhost:3001/jsonfile";
+    let filedata = {};
+    if (objFile.folder === 'component') {
+      filedata = {
+        description:'NEW COMPONENT',
+        actions: [],
+      };
+    }
+
     const createData = {
       filepath: `${objFile.folder}/${objFile.fileName}`,
-      filedata: {description:'NEW COMPONENT'},
+      filedata,
     }
     const httpMethod = "POST";
     httpRequest(createData, url, httpMethod, cb);
