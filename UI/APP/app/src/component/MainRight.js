@@ -34,7 +34,6 @@ class MainRight extends React.Component {
 
   filterComponent(cunrrentFileDetail){
     let tmpList = Object.entries(cunrrentFileDetail).filter((element)=>(element[0]!=='fileName' && element[0] !== 'folder')?true:false);
-    console.log('tmpList', tmpList)
     tmpList.sort((a, b) => {
       if (a[1].index < b[1].index) { return -1; }
       if (a[1].index > b[1].index) { return 1; }
@@ -50,7 +49,7 @@ class MainRight extends React.Component {
       const newComponent = {
         component: fileName,
         index: nextIndex,
-        uKey: queryResult.uKey,
+        ukey: queryResult.uKey,
       }
       this.props.addComponentInCurrentFile(nextKey,newComponent);
       this.setState({
@@ -65,7 +64,6 @@ class MainRight extends React.Component {
   }
 
   render(){
-    console.log(this.props)
     return (
       <div className="col-sm-3 mx-auto border">
         <ul className="list-group list-group-flush">
