@@ -7,6 +7,7 @@ const jsonfile = require('jsonfile');
 const path = require('path');
 const srs = require('secure-random-string');
 const _ = require('lodash');
+const open = require('open');
 
 const { getCasefilelist, readJsonFile } = require('../../util/util');
 const { log } = require('../../util/log');
@@ -17,6 +18,12 @@ const buildPath = path.join(__dirname, 'APP', 'app', 'build');
 router.get('/', (req, res) => {
   // res.render('main');
   res.sendFile(path.join(__dirname, buildPath, 'index.html'));
+});
+
+router.get('/openfile', (req, res) => {
+  // res.render('main');
+  open(`${process.env.executionFolder}/param.json`);
+  res.end();
 });
 
 
