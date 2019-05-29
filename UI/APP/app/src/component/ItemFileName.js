@@ -34,14 +34,14 @@ class ItemFileName extends React.Component {
       oldfilepath: `${folder}/${oldFileName}`,
       newfilepath: `${folder}/${value}`,
     };
-    const url = "http://localhost:3001/renamejsonfile";
+    const url = "/renamejsonfile";
     const httpMethod = "POST";
     httpRequest(postData, url, httpMethod, cb)
   }
   
   async selectedComponentFile(element) {
     this.props.selectKey(element[0]);
-    const url = `http://localhost:3001/${element[1].folder}/${element[1].fileName}`;
+    const url = `/${element[1].folder}/${element[1].fileName}`;
     const currentFileDetail = await queryFileDetail(url);
     currentFileDetail.fileName = element[1].fileName;
     currentFileDetail.folder = element[1].folder;
@@ -63,7 +63,7 @@ class ItemFileName extends React.Component {
       }
       cb.bind(this);
       const deleteObj = this.props.element[1];
-      const url = "http://localhost:3001/jsonfile";
+      const url = "/jsonfile";
       const deleteData = {
         filepath: `${deleteObj.folder}/${deleteObj.fileName}`,
       }

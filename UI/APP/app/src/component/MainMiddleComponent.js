@@ -132,7 +132,7 @@ class MainMiddleComponent extends React.Component {
     let cb = () => {
     }
     cb = cb.bind(this);
-    const url = "http://localhost:3001/jsonfile";
+    const url = "/jsonfile";
     const postData = {
       filepath: `${folder}/${fileName}`,
       filedata: {

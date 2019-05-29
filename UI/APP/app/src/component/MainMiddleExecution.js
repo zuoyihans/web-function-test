@@ -51,13 +51,12 @@ class MainMiddleExecution extends React.Component {
   }
 
   putParm(key, obj) {
-    console.log('this.state.actionParam', this.state.actionParam)
     this.setState({
       actionParam: {
         ...this.state.actionParam,
         [key]:{...obj},
       }
-    },()=>console.log('after', this.state.actionParam))
+    })
   }
 
   deleteParm(key) {
@@ -78,7 +77,7 @@ class MainMiddleExecution extends React.Component {
     let cb = () => {
     }
     cb = cb.bind(this);
-    const urlCase = "http://localhost:3001/jsonfile";
+    const urlCase = "/jsonfile";
     const postDataCase = {
       filepath: `${folder}/${fileName}`,
       filedata: tmpCurrentFileDetail,
@@ -87,7 +86,7 @@ class MainMiddleExecution extends React.Component {
     httpRequest(postDataCase, urlCase, httpMethod, cb);
 
     const { actionParam, deleteParmKey } = this.state;
-    const urlParm = "http://localhost:3001/jsonfile4parm";
+    const urlParm = "/jsonfile4parm";
     const postDataParm = {
       filepath: './execution/param.json',
       filedata: {

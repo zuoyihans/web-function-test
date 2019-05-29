@@ -15,24 +15,6 @@ const mapStateToProps = state => {
 };
 
 class AppRouter extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   // this.handleModuleType = this.handleModuleType.bind(this);
-  //   // this.handleModuleType('component');
-  // }
-
-  // handleModuleType(value) {
-  //   this.props.changeModule(value);
-    // if (value === 'component') {
-    //   const filesList = await queryFileList("http://localhost:3001/components");
-    //   this.props.initOBJLeftFiles(filesList);
-    // } else {
-    //   const filesListLeft = await queryFileList("http://localhost:3001/executions");
-    //   this.props.initOBJLeftFiles(filesListLeft);
-    //   const filesListRight = await queryFileList("http://localhost:3001/components");
-    //   this.props.initOBJRightFiles(filesListRight);
-    // }
-  // }
 
   render() {
     return (
@@ -45,13 +27,13 @@ class AppRouter extends React.Component {
                 <Link to="/" className={(this.props.currentModel === 'component')?"nav-link active":"nav-link"}>Home</Link>
               </li>
               <li className="nav-item" >
-                <Link to="/execution" className={(this.props.currentModel === 'execution')?"nav-link active":"nav-link"}>Execution</Link>
+                <Link to="/EXECUTIONPART" className={(this.props.currentModel === 'execution')?"nav-link active":"nav-link"}>Execution</Link>
               </li>
             </ul>
           </div>
         </nav>
         <Route path="/" exact component={ComponentMain} />
-        <Route path="/execution" exact component={ExecutionMain} />
+        <Route path="/EXECUTIONPART" exact component={ExecutionMain} />
       </BrowserRouter>
     )
   }

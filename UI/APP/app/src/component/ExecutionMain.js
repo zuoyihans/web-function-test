@@ -23,15 +23,10 @@ class ExecutionMain extends React.Component {
   }
 
   async initFilesList() {
-    const filesListLeft = await queryFileList("http://localhost:3001/executions");
+    const filesListLeft = await queryFileList("/executions");
     this.props.initOBJLeftFiles(filesListLeft);
-    const filesListRight = await queryFileList("http://localhost:3001/components");
+    const filesListRight = await queryFileList("/components");
     this.props.initOBJRightFiles(filesListRight);
-    // const paramJson = await queryReturnJson("http://localhost:3001/paramfile");
-    // console.log('paramJson', paramJson)
-    // this.setState({
-    //   paramJson,
-    // })
   }
 
   render() {

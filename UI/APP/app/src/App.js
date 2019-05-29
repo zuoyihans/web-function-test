@@ -6,7 +6,7 @@ import { refreshComponentFileListAsync } from './redux/actionCreator';
 
 class App extends React.Component {
   componentWillMount() {
-    this.props.refreshComponentFileListAsync("http://localhost:3001/components");
+    this.props.refreshComponentFileListAsync("/components");
   }
 
   render() {
