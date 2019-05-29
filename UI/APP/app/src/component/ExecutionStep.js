@@ -64,9 +64,9 @@ class ExecutionStep extends React.Component {
   async getParmsKey(fileName) {
     let url;
     if(fileName.indexOf('.json')=== -1) {
-      url = `http://localhost:3001/component/${fileName}.json`;
+      url = `/component/${fileName}.json`;
     } else {
-      url = `http://localhost:3001/component/${fileName}`;
+      url = `/component/${fileName}`;
     }
     const queryResult = await queryReturnJson(url)
     const filterResult = [];
@@ -88,7 +88,7 @@ class ExecutionStep extends React.Component {
   }
 
   async getparmObj(ukey) {
-    const paramQueryResult = await queryReturnJson("http://localhost:3001/paramfile");
+    const paramQueryResult = await queryReturnJson("/paramfile");
     const { paramfile } =paramQueryResult;
     return paramfile[ukey];
   }

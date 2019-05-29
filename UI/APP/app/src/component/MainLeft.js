@@ -47,7 +47,7 @@ class MainLeft extends React.Component {
       })
     }
     cb = cb.bind(this);
-    const url = "http://localhost:3001/jsonfile";
+    const url = "http://localhost:/jsonfile";
     let filedata = {};
     if (objFile.folder === 'component') {
       filedata = {

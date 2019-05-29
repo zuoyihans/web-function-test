@@ -21,7 +21,7 @@ class ComponentMain extends React.Component {
   }
 
   async initLeftFilesList() {
-    const filesList = await queryFileList("http://localhost:3001/components");
+    const filesList = await queryFileList("/components");
     this.props.initOBJLeftFiles(filesList);
   }
 

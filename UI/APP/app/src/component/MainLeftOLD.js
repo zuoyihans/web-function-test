@@ -44,7 +44,7 @@ class MainLeft extends React.Component {
     const tmpComponentFile = {
       fileName: value,
       id: index,
-      link: `http://localhost:3001/component/${value}`
+      link: `http://localhost:/component/${value}`
     };
     tmpcomponentFiles[index] = {...tmpComponentFile};
     tmpidList.push(index);
@@ -68,7 +68,7 @@ class MainLeft extends React.Component {
         actions: [],
       }
     }
-    const url = "http://localhost:3001/jsonfile";
+    const url = "http://localhost:/jsonfile";
     fetch(url, {
       body: JSON.stringify(data),
       method: 'POST',
@@ -111,7 +111,7 @@ class MainLeft extends React.Component {
     }
     cb = cb.bind(this);
 
-    const url = "http://localhost:3001/jsonfile";
+    const url = "http://localhost:/jsonfile";
     const deleteData = {
       filepath: `.${URL.parse(deleteObj.link).path}`,
     }
@@ -154,7 +154,7 @@ class MainLeft extends React.Component {
       oldfilepath: `.${oldPath}`,
       newfilepath: `.${newPath}`,
     };
-    const url = "http://localhost:3001/renamejsonfile";
+    const url = "http://localhost:/renamejsonfile";
     const httpMethod = "POST";
     httpRequest(postData, url, httpMethod, cb)
   }

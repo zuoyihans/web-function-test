@@ -44,7 +44,7 @@ class MainRight extends React.Component {
   async addNewComponent(fileName) {
     if (Object.prototype.hasOwnProperty.call(this.props.cunrrentFileDetail, 'fileName')) {
       const { nextKey, nextIndex } = this.state;
-      const url = 'http://localhost:3001/ukey8length';
+      const url = '/ukey8length';
       const queryResult= await queryReturnJson(url);
       const newComponent = {
         component: fileName,
