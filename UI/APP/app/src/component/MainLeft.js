@@ -49,7 +49,7 @@ class MainLeft extends React.Component {
     cb = cb.bind(this);
     const url = "/jsonfile";
     let filedata = {};
-    if (objFile.folder === 'component') {
+    if (objFile.folder === './component') {
       filedata = {
         description:'NEW COMPONENT',
         actions: [],
@@ -74,7 +74,7 @@ class MainLeft extends React.Component {
     ):(
       <div className="row justify-content-center">
         <button type="button" className="btn btn-info btn-sm col-11" onClick={e=>this.setState({ showInputFileName: !this.state.showInputFileName})}>
-            <span className="fas fa-plus"> New Component</span>
+            <span className="fas fa-plus"> NEW FILE</span>
         </button>
       </div>
     );
