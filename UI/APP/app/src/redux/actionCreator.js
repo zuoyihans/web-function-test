@@ -70,17 +70,3 @@ export const deleteComponentInCurrentFile = (key) => ({
   type:DELETE_COMPONENT_IN_CURRENT_FILE,
   delKey:[...key],
 })
-
-// export const refreshCurrentComponentFileAsync = (link) => {
-//   return dispatch => {
-//     return fetch(link)
-//     .then(response => response.json())
-//     .then(
-//       sauce => {
-//         sauce.link = link;
-//         dispatch(refreshCurrentComponentFile(sauce));
-//       },
-//       err => {console.log(err)}
-//     )
-//   }
-// }

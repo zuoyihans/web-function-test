@@ -6,7 +6,7 @@ import MainLeft from './MainLeft';
 import MainMiddleExecution from './MainMiddleExecution';
 import MainRight from './MainRight';
 
-import { queryFileList, queryReturnJson } from '../util';
+import { queryFileList } from '../util';
 import { changeModule, initOBJLeftFiles, initOBJRightFiles } from '../redux/actionCreator';
 
 
@@ -27,11 +27,11 @@ class ExecutionMain extends React.Component {
     this.props.initOBJLeftFiles(filesListLeft);
     const filesListRight = await queryFileList("http://localhost:3001/components");
     this.props.initOBJRightFiles(filesListRight);
-    const paramJson = await queryReturnJson("http://localhost:3001/paramfile");
-    console.log('paramJson', paramJson)
-    this.setState({
-      paramJson,
-    })
+    // const paramJson = await queryReturnJson("http://localhost:3001/paramfile");
+    // console.log('paramJson', paramJson)
+    // this.setState({
+    //   paramJson,
+    // })
   }
 
   render() {

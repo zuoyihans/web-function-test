@@ -6,6 +6,7 @@ const fs = require('fs');
 const jsonfile = require('jsonfile');
 const path = require('path');
 const srs = require('secure-random-string');
+const _ = require('lodash');
 
 const { getCasefilelist, readJsonFile } = require('../../util/util');
 const { log } = require('../../util/log');
@@ -99,6 +100,26 @@ router.post('/jsonfile', (req, res) => {
     });
   });
 });
+router.post('/jsonfile4parm', (req, res) => {
+  const { filepath, filedata } = req.body;
+  let parmJson = readJsonFile(filepath);
+  parmJson = {
+    ...parmJson,
+    ...filedata.parmJson,
+  };
+  parmJson = _.omit(parmJson, filedata.deleteKey);
+  jsonfile.writeFile(filepath, parmJson, { spaces: 2, EOL: '\r\n' }, (writeerr) => {
+    if (writeerr) {
+      log.error(writeerr);
+      res.status(500).send(writeerr);
+      return;
+    }
+    res.json({
+      result: 'done',
+    });
+  });
+});
+
 router.delete('/jsonfile', (req, res) => {
   const { filepath } = req.body;
   fs.unlink(filepath, (err) => {

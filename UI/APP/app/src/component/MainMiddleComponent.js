@@ -120,7 +120,6 @@ class MainMiddleComponent extends React.Component {
   }
 
   saveComponentFile(){
-    console.log(this.props)
     const {
       fileName,
       folder,
