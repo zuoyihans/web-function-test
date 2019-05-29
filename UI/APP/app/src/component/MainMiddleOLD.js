@@ -129,7 +129,7 @@ class MainMiddle extends React.Component {
         actions: this.state.actions.map(this.filterStep),
       }
     }
-    const url = "http://localhost:/jsonfile";
+    const url = "http://"/:/jsonfile";
     fetch(url, {
       body: JSON.stringify(data),
       method: 'POST',

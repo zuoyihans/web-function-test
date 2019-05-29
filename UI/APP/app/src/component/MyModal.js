@@ -11,7 +11,6 @@ class MyModal extends React.Component {
   }
 
   deleteElement(){
-    console.log(this.props.index);
     $(`exampleModal${this.props.index}`).modal('toggle');
     this.props.executeLogic(this.props.elememt, this.props.index);
   }

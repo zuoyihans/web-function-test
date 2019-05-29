@@ -51,13 +51,12 @@ class MainMiddleExecution extends React.Component {
   }
 
   putParm(key, obj) {
-    console.log('this.state.actionParam', this.state.actionParam)
     this.setState({
       actionParam: {
         ...this.state.actionParam,
         [key]:{...obj},
       }
-    },()=>console.log('after', this.state.actionParam))
+    })
   }
 
   deleteParm(key) {
