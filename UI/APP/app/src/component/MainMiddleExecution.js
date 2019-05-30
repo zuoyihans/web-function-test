@@ -18,6 +18,7 @@ class MainMiddleExecution extends React.Component {
     this.state = {
       executionStep: this.filterComponent(this.props.cunrrentFileDetail),
       deleteParmKey:[],
+      saveButtonShow:true,
     }
     this.putParm= this.putParm.bind(this);
     this.deleteParm = this.deleteParm.bind(this);
@@ -74,16 +75,14 @@ class MainMiddleExecution extends React.Component {
         tmpCurrentFileDetail.push(cunrrentFileDetail[key])
       }
     })
-    let cb = () => {
-    }
-    cb = cb.bind(this);
+    
     const urlCase = "/jsonfile";
     const postDataCase = {
       filepath: `${folder}/${fileName}`,
       filedata: tmpCurrentFileDetail,
     }
     const httpMethod = "POST";
-    httpRequest(postDataCase, urlCase, httpMethod, cb);
+   
 
     const { actionParam, deleteParmKey } = this.state;
     const urlParm = "/jsonfile4parm";
@@ -94,7 +93,20 @@ class MainMiddleExecution extends React.Component {
         deleteKey: deleteParmKey,
       },
     };
-    httpRequest(postDataParm, urlParm, httpMethod, cb);
+    let cb = () => {
+      this.setState({
+        saveButtonShow:true,
+      })
+    }
+    cb = cb.bind(this);
+    this.setState({
+      saveButtonShow:false,
+    }, () => {
+      httpRequest(postDataCase, urlCase, httpMethod, ()=>{
+        httpRequest(postDataParm, urlParm, httpMethod, cb)
+      });
+    })
+    
   }
 
   render() {
@@ -110,7 +122,18 @@ class MainMiddleExecution extends React.Component {
           <span className="fas fa-save"> Save</span>
         </button>
       )
-    }
+      if (this.state.saveButtonShow) {
+        saveButton = (
+          <button type="button" className="btn btn-primary btn-sm col-2" onClick={this.saveComponentFile}>
+            <span className="fas fa-save"> Save</span>
+          </button>
+        )
+      } else {
+        saveButton = (
+          <i class="fas fa-sync fa-spin"></i>
+        )
+      }
+    } 
      
     return (
       <div className="col-sm-6 auto-mx border">

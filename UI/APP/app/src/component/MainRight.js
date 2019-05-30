@@ -46,8 +46,9 @@ class MainRight extends React.Component {
       const { nextKey, nextIndex } = this.state;
       const url = '/ukey8length';
       const queryResult= await queryReturnJson(url);
+      const fileNameBase = fileName.replace(/\.json$/i,'')
       const newComponent = {
-        component: fileName,
+        component: fileNameBase,
         index: nextIndex,
         ukey: queryResult.uKey,
       }

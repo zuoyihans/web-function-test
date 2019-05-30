@@ -5,7 +5,7 @@ import { addOBJLeftFile } from '../redux/actionCreator';
 import InputUpdatePropsWhenblurOrEnter from './InputUpdatePropsWhenblurOrEnter';
 import ItemFileName from './ItemFileName';
 
-import { httpRequest } from '../util';
+import { httpRequest, queryReturnJson } from '../util';
 
 const mapStateToProps = state => { 
   const { objLeftFiles, currentIndex, currentModel } = state.ComponentFile;
@@ -73,20 +73,27 @@ class MainLeft extends React.Component {
       </div>
     ):(
       <div className="row justify-content-center">
-        <button type="button" className="btn btn-info btn-sm col-11" onClick={e=>this.setState({ showInputFileName: !this.state.showInputFileName})}>
+        <button type="button" className="btn btn-info btn-sm col-11 border" onClick={e=>this.setState({ showInputFileName: !this.state.showInputFileName})}>
             <span className="fas fa-plus"> NEW FILE</span>
         </button>
       </div>
     );
-
+    const paramFileOpenButton = (
+      <div className="row justify-content-center">
+        <button type="button" className="btn btn-info btn-sm col-11 border" onClick={e=>{queryReturnJson("/openparamfile")}}>
+            <span className="fas fa-file"> PARAM FILE</span>
+        </button>
+      </div>
+    )
     return (
       <div className="col-sm-3 mx-auto border">
         <ul className="list-group list-group-flush">
           {
             Object.entries(this.props.objLeftFiles).map((element) => {
-              return (
+              const item = (element[1].fileName==='param.json')?paramFileOpenButton:(
                 <ItemFileName element={element} key={element[0]} currentKey={this.state.currentKey} selectKey={this.selectKey}></ItemFileName>
-              )
+              );
+              return item;
             })
           }
         </ul>
