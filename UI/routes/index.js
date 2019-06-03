@@ -7,12 +7,8 @@ const jsonfile = require('jsonfile');
 const path = require('path');
 const srs = require('secure-random-string');
 const _ = require('lodash');
-<<<<<<< HEAD
-const open = require('open');
-=======
 const openFile = require('open');
 
->>>>>>> 26c08c06dd03f5e795321362b31d20f57eb9076d
 
 const { getCasefilelist, readJsonFile } = require('../../util/util');
 const { log } = require('../../util/log');
@@ -25,20 +21,11 @@ router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, buildPath, 'index.html'));
 });
 
-<<<<<<< HEAD
-router.get('/openfile', (req, res) => {
-  // res.render('main');
-  open(`${process.env.executionFolder}/param.json`);
-  res.end();
-});
-
-=======
 router.get('/openparamfile', (req, res) => {
   const { executionFolder } = process.env;
   openFile(`${executionFolder}/param.json`);
   res.end();
 });
->>>>>>> 26c08c06dd03f5e795321362b31d20f57eb9076d
 
 router.get('/components', (req, res) => {
   const { componentFolder } = process.env;
